@@ -27,7 +27,7 @@ class ReportsAddModal extends Component {
     }
 
     addReport = () => {
-        axios.post(`http://localhost:5000/reports/add`, { links: this.state.links, name: this.state.name, isOpen: this.state.isOpen, text: this.state.text })
+        axios.post(`https://geronimoprojectwebsite.herokuapp.com/reports/add`, { links: this.state.links, name: this.state.name, isOpen: this.state.isOpen, text: this.state.text })
             .then(res => {
                 console.log(res.data)
                 this.props.toggleRefresh()

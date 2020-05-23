@@ -25,7 +25,7 @@ class CalendarCompareModal extends Component {
             soldID.push(sold[i])
         }
         for (let soldier of soldID) {
-            axios.get(`http://localhost:5000/soldier/${soldier}`)
+            axios.get(`https://geronimoprojectwebsite.herokuapp.com/soldier/${soldier}`)
                 .then(response => {
                     let obj = response.data.equip
                     let tempArr = []
@@ -40,7 +40,7 @@ class CalendarCompareModal extends Component {
                     console.log(error);
                 });
         }
-        axios.get(`http://localhost:5000/equipment`)
+        axios.get(`https://geronimoprojectwebsite.herokuapp.com/equipment`)
             .then(response => {
                 for (let missing of this.state.soldierMissing) {
                     let tempArrTwo = []

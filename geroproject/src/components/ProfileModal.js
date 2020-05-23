@@ -14,7 +14,7 @@ class ProfileModal extends Component {
     }
 
     componentDidMount() {
-        axios.get(`http://localhost:5000/soldier/${this.props.soldierID}`)
+        axios.get(`https://geronimoprojectwebsite.herokuapp.com/soldier/${this.props.soldierID}`)
         .then(response => {
             this.setState({ soldierData: response.data })
         })

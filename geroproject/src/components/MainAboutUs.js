@@ -13,7 +13,7 @@ class MainAboutUs extends Component {
     }
 
     componentDidMount() {
-        axios.get(`http://localhost:5000/aboutUs/geronimo`)
+        axios.get(`https://geronimoprojectwebsite.herokuapp.com/aboutUs/geronimo`)
         .then(response => {
             this.setState({ 
                 links: response.data.links,

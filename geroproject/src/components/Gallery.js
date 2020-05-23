@@ -13,7 +13,7 @@ class Gallery extends Component {
     }
 
     componentDidMount() {
-        axios.get(`http://localhost:5000/gallery/`)
+        axios.get(`https://geronimoprojectwebsite.herokuapp.com/gallery/`)
         .then(response => {
             this.setState({ galleries: response.data })
         })

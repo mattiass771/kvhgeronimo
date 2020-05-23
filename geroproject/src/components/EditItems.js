@@ -10,14 +10,14 @@ function EditItems(props) {
     let soldier = props.soldier
 
     const updateItem = (short) => {
-        axios.get(`http://localhost:5000/soldier/${localStorage.getItem("id")}`)
+        axios.get(`https://geronimoprojectwebsite.herokuapp.com/soldier/${localStorage.getItem("id")}`)
                 .then(response => {
                     let obj = response.data.equip
                     for (let key in obj) {
                         if (key === short) {
                             obj[key] = !obj[key]
                             let equip = obj
-                            axios.post(`http://localhost:5000/soldier/update/${localStorage.getItem("id")}`, {equip})
+                            axios.post(`https://geronimoprojectwebsite.herokuapp.com/soldier/update/${localStorage.getItem("id")}`, {equip})
                                 .then(res => {
                                     console.log(res.data)
                                 })

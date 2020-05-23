@@ -15,7 +15,7 @@ class Platoon extends Component {
     }
 
     componentDidMount() {
-        axios.get(`http://localhost:5000/soldier/`)
+        axios.get(`https://geronimoprojectwebsite.herokuapp.com/soldier/`)
         .then(response => {
             this.setState({ soldierData: response.data })
         })

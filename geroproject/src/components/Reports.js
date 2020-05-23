@@ -25,7 +25,7 @@ class Reports extends Component {
     }
     
     componentDidMount() {
-        axios.get(`http://localhost:5000/reports/`)
+        axios.get(`https://geronimoprojectwebsite.herokuapp.com/reports/`)
         .then(response => {
             this.setState({ reports: response.data })
         })
@@ -35,7 +35,7 @@ class Reports extends Component {
     }
 
     toggleRefresh = () => {
-        axios.get(`http://localhost:5000/reports/`)
+        axios.get(`https://geronimoprojectwebsite.herokuapp.com/reports/`)
         .then(response => {
             this.setState({ reports: response.data })
             console.log("refreshed")

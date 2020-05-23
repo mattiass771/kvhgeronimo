@@ -22,7 +22,7 @@ class DeleteFromDb extends Component {
     //PROPS: collectionID, itemID, toggleDeleteItem
 
     handleDelete = () => {
-        axios.delete(`http://localhost:5000/${this.props.collectionID}/${this.props.itemID}`)
+        axios.delete(`https://geronimoprojectwebsite.herokuapp.com/${this.props.collectionID}/${this.props.itemID}`)
             .then(res => {
                 console.log(res.data)
                 this.props.toggleRefresh()

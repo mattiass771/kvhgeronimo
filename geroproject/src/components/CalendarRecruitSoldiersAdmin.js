@@ -17,12 +17,12 @@ class CalendarRecruitSoldiersAdmin extends Component {
         const {name, value} = event.target
         this.setState({ [name]: value })
         console.log(this.props.calendarID)
-        axios.get(`http://localhost:5000/calendar/${this.props.calendarID}`)
+        axios.get(`https://geronimoprojectwebsite.herokuapp.com/calendar/${this.props.calendarID}`)
             .then(response => {
                 this.setState({ recruits: response.data.soldiers })
                 let soldierArr = [...this.state.recruits, value]
                 console.log(soldierArr)
-                axios.post(`http://localhost:5000/calendar/update-soldiers/${this.props.calendarID}`, { soldiers: soldierArr } )
+                axios.post(`https://geronimoprojectwebsite.herokuapp.com/calendar/update-soldiers/${this.props.calendarID}`, { soldiers: soldierArr } )
                     .then(res => {
                         console.log(res.data)
                         this.props.refresh()
