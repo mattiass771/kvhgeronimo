@@ -20,7 +20,7 @@ class Login extends Component {
     }
 
     handleSubmit = () => {
-        axios.get(`https://geronimoprojectwebsite.herokuapp.com/soldier/${this.state.password}`)
+        axios.get(`https://kvhgeronimo.herokuapp.com/soldier/${this.state.password}`)
             .then(response => {
                 if (response.data.name === this.state.username && response.data.password === this.state.password) {
                     console.log("Logged In")

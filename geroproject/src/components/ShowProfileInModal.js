@@ -12,7 +12,7 @@ class ShowProfileInModal extends Component {
     }
 
     componentDidMount() {
-        axios.get(`https://geronimoprojectwebsite.herokuapp.com/soldier/${this.props.soldierID}`)
+        axios.get(`https://kvhgeronimo.herokuapp.com/soldier/${this.props.soldierID}`)
             .then(res => {
                 this.setState({ myStory: res.data.story })
             })

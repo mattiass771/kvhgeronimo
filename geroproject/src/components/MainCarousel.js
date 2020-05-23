@@ -13,7 +13,7 @@ class MainCarousel extends Component {
     }
 
     componentDidMount() {
-        axios.get(`https://geronimoprojectwebsite.herokuapp.com/gallery`)
+        axios.get(`https://kvhgeronimo.herokuapp.com/gallery`)
         .then(response => {
             this.setState({ 
                 galleries: response.data

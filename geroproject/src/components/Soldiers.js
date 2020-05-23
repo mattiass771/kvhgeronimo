@@ -24,14 +24,14 @@ class Soldiers extends Component {
     }
 
     componentDidMount() {
-        axios.get('https://geronimoprojectwebsite.herokuapp.com/equipment')
+        axios.get('https://kvhgeronimo.herokuapp.com/equipment')
             .then(response => {
                 this.setState({ equipment: response.data })
             })
             .catch(error => {
                 console.log(error);
             });
-        axios.get('https://geronimoprojectwebsite.herokuapp.com/soldier')
+        axios.get('https://kvhgeronimo.herokuapp.com/soldier')
             .then(response => {
                 this.setState({ soldiers: response.data })
             })
@@ -41,7 +41,7 @@ class Soldiers extends Component {
     }
 
     getUpdate = () => {
-        axios.get('https://geronimoprojectwebsite.herokuapp.com/soldier')
+        axios.get('https://kvhgeronimo.herokuapp.com/soldier')
             .then(response => {
                 this.setState({ soldiers: response.data })
             })

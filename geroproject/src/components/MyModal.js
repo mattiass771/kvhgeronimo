@@ -15,7 +15,7 @@ class MyModal extends Component {
     }
 
     componentDidMount() {
-        axios.get(`https://geronimoprojectwebsite.herokuapp.com/equipInfo/${this.props.item[1]}`)
+        axios.get(`https://kvhgeronimo.herokuapp.com/equipInfo/${this.props.item[1]}`)
             .then(response => {
                 this.setState({ itemImage: response.data.image, itemLinks: response.data.links })
             })

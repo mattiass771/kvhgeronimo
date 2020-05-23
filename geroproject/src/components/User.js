@@ -21,14 +21,14 @@ class UpdateItems extends Component {
     }
 
     componentDidMount() {
-        axios.get(`https://geronimoprojectwebsite.herokuapp.com/equipment/`)
+        axios.get(`https://kvhgeronimo.herokuapp.com/equipment/`)
             .then(response => {
                 this.setState({ equipment: response.data })
             })
             .catch(error => {
                 console.log(error);
             });
-        axios.get(`https://geronimoprojectwebsite.herokuapp.com/soldier/${localStorage.getItem("id")}`)
+        axios.get(`https://kvhgeronimo.herokuapp.com/soldier/${localStorage.getItem("id")}`)
             .then(response => {
                 this.setState({ soldier: response.data.equip, soldierData: response.data })
             })
@@ -38,10 +38,10 @@ class UpdateItems extends Component {
     }
 
     refreshProps = () => {
-        axios.get(`https://geronimoprojectwebsite.herokuapp.com/soldier/${localStorage.getItem("id")}`)
+        axios.get(`https://kvhgeronimo.herokuapp.com/soldier/${localStorage.getItem("id")}`)
         .then(res => {
             this.setState({ soldier: res.data.equip })
-            axios.get(`https://geronimoprojectwebsite.herokuapp.com/soldier/${localStorage.getItem("id")}`)
+            axios.get(`https://kvhgeronimo.herokuapp.com/soldier/${localStorage.getItem("id")}`)
                 .then(response => {
                     this.setState({ soldier: response.data.equip })
                 })

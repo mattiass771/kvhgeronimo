@@ -22,7 +22,7 @@ class OpenGallery extends Component {
     //props: galleryID, gallery = links, toggleGal
 
     componentDidMount() {
-        axios.get(`https://geronimoprojectwebsite.herokuapp.com/gallery/${localStorage.getItem("galleryID")}`)
+        axios.get(`https://kvhgeronimo.herokuapp.com/gallery/${localStorage.getItem("galleryID")}`)
         .then(response => {
             this.setState({ galleries: response.data.links })
         })

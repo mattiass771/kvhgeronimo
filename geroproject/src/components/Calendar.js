@@ -36,7 +36,7 @@ class Calendar extends Component {
     }
     
     componentDidMount() {
-        axios.get(`https://geronimoprojectwebsite.herokuapp.com/calendar/`)
+        axios.get(`https://kvhgeronimo.herokuapp.com/calendar/`)
             .then(response => {
                 this.setState({ calendar: response.data })
             })
@@ -44,7 +44,7 @@ class Calendar extends Component {
                 console.log(error);
             });
 
-        axios.get(`https://geronimoprojectwebsite.herokuapp.com/soldier/`)
+        axios.get(`https://kvhgeronimo.herokuapp.com/soldier/`)
             .then(response => {
                 this.setState({ soldierData: response.data })
             })
@@ -84,7 +84,7 @@ class Calendar extends Component {
     //
 
     toggleRefresh = () => {
-        axios.get(`https://geronimoprojectwebsite.herokuapp.com/calendar/`)
+        axios.get(`https://kvhgeronimo.herokuapp.com/calendar/`)
             .then(response => {
                 this.setState({ calendar: response.data })
                 console.log("refreshed")

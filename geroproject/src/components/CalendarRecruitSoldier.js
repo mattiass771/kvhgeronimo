@@ -21,12 +21,12 @@ class CalendarRecruitSoldier extends Component {
 
     handleChange = () => {
         console.log( this.state.button )
-        axios.get(`https://geronimoprojectwebsite.herokuapp.com/calendar/${this.props.calendarID}`)
+        axios.get(`https://kvhgeronimo.herokuapp.com/calendar/${this.props.calendarID}`)
             .then(response => {
                 this.setState({ recruits: response.data.soldiers })
                 if (!this.state.recruits.includes(this.state.soldier)) {
                     let soldierArr = [...this.state.recruits, this.state.soldier]
-                    axios.post(`https://geronimoprojectwebsite.herokuapp.com/calendar/update-soldiers/${this.props.calendarID}`, { soldiers: soldierArr } )
+                    axios.post(`https://kvhgeronimo.herokuapp.com/calendar/update-soldiers/${this.props.calendarID}`, { soldiers: soldierArr } )
                     .then(res => {
                         this.setState({ button: "remove" })
                         console.log(res.data)
@@ -38,7 +38,7 @@ class CalendarRecruitSoldier extends Component {
                 } else {
                     let soldierArr = [...this.state.recruits]
                     soldierArr.splice(soldierArr.indexOf(this.state.soldier),1)
-                    axios.post(`https://geronimoprojectwebsite.herokuapp.com/calendar/update-soldiers/${this.props.calendarID}`, { soldiers: soldierArr } )
+                    axios.post(`https://kvhgeronimo.herokuapp.com/calendar/update-soldiers/${this.props.calendarID}`, { soldiers: soldierArr } )
                     .then(res => {
                         this.setState({ button: "add" })
                         console.log(res.data)

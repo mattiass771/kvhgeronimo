@@ -13,7 +13,7 @@ class Profile extends Component {
     }
 
     componentDidMount() {
-        axios.get(`https://geronimoprojectwebsite.herokuapp.com/soldier/${localStorage.getItem("id")}`)
+        axios.get(`https://kvhgeronimo.herokuapp.com/soldier/${localStorage.getItem("id")}`)
             .then(res => {
                 this.setState({ myStory: res.data.story })
             })
@@ -29,7 +29,7 @@ class Profile extends Component {
     setEdit = () => {
         this.setState({ edit: !this.state.edit })
         if (this.state.edit) {
-            axios.post(`https://geronimoprojectwebsite.herokuapp.com/soldier/update-story/${localStorage.getItem("id")}`, { story: this.state.myStory } )
+            axios.post(`https://kvhgeronimo.herokuapp.com/soldier/update-story/${localStorage.getItem("id")}`, { story: this.state.myStory } )
             .then(res => {
                 console.log(res.data)
             })
