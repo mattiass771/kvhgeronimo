@@ -56,8 +56,8 @@ class Platoon extends Component {
                         <span key={tempData._id}>
                             <Row>
                                 <Col xs={4}>
-                                    <Image src={tempData.imageURL ? tempData.imageURL : 
-"https://i.ibb.co/RYtTKY1/emptypicture.jpg"} roundedCircle fluid/>
+                                    <Image style={{marginLeft:"5px"}} src={tempData.imageURL ? tempData.imageURL : 
+"https://i.ibb.co/RYtTKY1/emptypicture.jpg"} thumbnail fluid/>
                                 </Col>
                                 <Col className="para" onClick={this.handleClick} data-id={tempData._id} xs={8}>
                                     {tempData.completeName}

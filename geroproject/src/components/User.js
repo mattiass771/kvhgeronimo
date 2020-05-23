@@ -21,7 +21,7 @@ class UpdateItems extends Component {
     }
 
     componentDidMount() {
-        axios.get('https://geronimoprojectwebsite.herokuapp.com/equipment')
+        axios.get(`https://geronimoprojectwebsite.herokuapp.com/equipment/`)
             .then(response => {
                 this.setState({ equipment: response.data })
             })
@@ -84,7 +84,7 @@ class UpdateItems extends Component {
                     </Tab>
                     <Tab className="soldier-background" eventKey="itemList" title="List of Items">
                         <br />
-                        <EditItems refresh={this.refreshProps} togglePop={this.togglePop} equip={this.state.equipment} soldier={this.state.soldier} />
+                        {this.state.equipment.length > 0 && <EditItems refresh={this.refreshProps} togglePop={this.togglePop} equip={this.state.equipment} soldier={this.state.soldier} />}
                     </Tab>
                 </Tabs>
             </Container>

@@ -64,23 +64,25 @@ function EditItems(props) {
         }
         for (let typ of types) {
             onShow.push(typ)
-            for (let elem of arr) {
-                if (elem[0] === typ && (elem[4].includes(army, "universal") || army === "all")) {
-                    onShow.push(
-                        <span key={elem[2]} onClick={props.refresh}>
-                            <p lg={8} className="para" data-header={elem[1]} data-short={elem[2]} onClick={props.togglePop}>
-                                {elem[1]}
-                            </p>
-                            {elem[3] ? 
-                            <FaRegCheckCircle className="btn-smaller" onClick={() => updateItem(elem[2])} />
-                            :
-                            <FaRegCircle className="btn-smaller" onClick={() => updateItem(elem[2])} />
-                            }
-                        <br />
-                        </span>
-                    )
-                }
+                for (let elem of arr) {
+                    // console.log(elem, arr)
+                    if (elem[4] !== undefined && elem[0] === typ && (elem[4].includes(army, "universal") || army === "all")) {
+                        onShow.push(
+                            <span key={elem[2]} onClick={props.refresh}>
+                                <p lg={8} className="para" data-header={elem[1]} data-short={elem[2]} onClick={props.togglePop}>
+                                    {elem[1]}
+                                </p>
+                                {elem[3] ? 
+                                <FaRegCheckCircle className="btn-smaller" onClick={() => updateItem(elem[2])} />
+                                :
+                                <FaRegCircle className="btn-smaller" onClick={() => updateItem(elem[2])} />
+                                }
+                            <br />
+                            </span>
+                        )
+                    }
             }
+            
             final.push(
                 <span key={typ}>
                     <h3>{onShow.splice(0,1)}</h3>
