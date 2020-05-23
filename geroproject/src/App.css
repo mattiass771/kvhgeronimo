@@ -1,0 +1,235 @@
+body {
+  font-family: 'special_eliteregular', Arial, sans-serif;
+  font-size: 95%;
+  margin: 0;
+  background-image: url(https://i.imgur.com/TVPQFcw.gif);
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-attachment: fixed;
+}
+.pointer-on-hover {
+  cursor: pointer;
+}
+.card-footer-span {
+  position: relative;
+  top: -26px !important;
+}
+
+.soldier-background {
+  /* background-image: url(https://i.imgur.com/2a4srsa.jpg); */
+  background-image: url(https://i.imgur.com/MrcxQnw.jpg);
+  background-repeat: no-repeat;
+  background-size: cover;
+  /* background-attachment: fixed; */
+}
+
+/* LEN TOTO */
+.block-background {
+  background-image: url(https://i.imgur.com/MrcxQnw.jpg);
+  background-repeat: no-repeat;
+  background-size: cover;
+  /* background-attachment: fixed; */
+}
+/*****************/
+
+/* MAIN */
+.about-image {
+  float: right;
+  margin-left: 20px;
+  margin-bottom: 20px;
+  max-width: 350px;
+  text-align: center;
+}
+
+/* GALLERY */
+.gallery {
+  margin-top: 10px;
+}
+
+.gallery img {
+  height: 200px;
+  width: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+
+.gallery :hover {
+  border-color: #C7BEB5;
+  border-width: 1.5px;
+  cursor: pointer;
+}
+
+/*Arrows*/
+.leftArrow {
+  color: white;
+  position: absolute;
+  height: 100%;
+  width: 100px;
+  opacity: 0.6;
+}
+
+.leftArrow:hover {
+  opacity: 1.0;
+  cursor: pointer;
+}
+
+.rightArrow {
+  color: white;
+  position: absolute;
+  left: 86%;
+  text-align: "right";
+  height: 100%;
+  width: 100px;
+  opacity: 0.6;
+}
+
+.rightArrow:hover {
+  opacity: 1.0;
+  cursor: pointer;
+}
+
+/* REPORT */
+.report-info, .report-full {
+  overflow-y: hidden;
+  -webkit-transition: max-height 0.5s ease-in-out;
+  -moz-transition: max-height 0.5s ease-in-out;
+  -o-transition: max-height 0.5s ease-in-out;
+  transition: max-height 0.5s ease-in-out;
+}
+
+.report-info {
+  max-height: 250px;
+  overflow: hidden;
+}
+
+.report-full {
+  overflow: auto;
+  max-height: 1000px;
+}
+
+.report-full::-webkit-scrollbar {
+  display: none;
+}
+
+/*CAROUSEL*/
+.carousel img {
+  height: 300px;
+  width: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+
+.pointer-fade-on-hover:hover {
+  opacity: 1;
+  cursor: pointer;
+}
+
+.pointer-fade-on-hover {
+  opacity: 0.6;
+  cursor: pointer;
+}
+
+/* TABS*/
+.color-tab a:link {
+  color: grey;
+  background-image: url(https://i.imgur.com/MrcxQnw.jpg);
+}
+
+.col-sm-6 {
+  text-align: left;
+}
+
+/* POPUP HANDLER */
+.para:hover {
+  cursor: pointer;
+  color: #433F40
+}
+
+.para {
+  display: inline-flex;
+  margin-bottom: 7.5px;
+}
+
+/* BUTTON */
+.btn-check {
+  min-height: 20px;
+  min-width: 20px;
+}
+
+.btn-smaller {
+  margin-left: 5px;
+  min-height: 20px;
+  min-width: 20px;
+}
+
+.btn-smaller:hover {
+  cursor: pointer;
+  color: #433F40
+}
+
+.edit-story {
+  color: black;
+  background-color: whitesmoke;
+  font-style: italic;
+  margin-top: 5px;
+  margin-bottom: -10px;
+}
+
+.edit-story:hover {
+  color: gray;
+}
+
+/* SCROLLBAR */
+::-webkit-scrollbar {
+  width: 7.5px;
+  position: absolute;
+}
+
+::-webkit-scrollbar-track {
+  background: #fff;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 50px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+
+/* Screen Optim. */
+
+@media screen and (max-width: 768px) {
+  .rightArrow {
+    width: 50px !important;
+    left: 87% !important;
+  }
+  .leftArrow {
+    width: 50px !important;
+  }
+  .gallery {
+    height: 200px;
+  }
+  .about-image {
+    margin-left: 10px;
+    margin-bottom: 10px;
+    max-width: 250px;
+  }
+}
+
+@media screen and (max-width: 992px) {
+  .rightArrow {
+    width: 75px;
+    left: 82%;
+  }
+  .leftArrow {
+    width: 75px;
+  }
+}
+
+@media screen and (min-width: 1200px) {
+  .rightArrow {
+    left: 86%;
+  }
+}
