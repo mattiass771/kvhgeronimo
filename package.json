@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "cd geroproject && react-scripts build",
+    "build": "cd geroproject && npm run build",
     "install-client": "cd geroproject && npm install",
     "heroku-postbuild": "npm run install-client && npm run build",
     "start": "node server.js",
