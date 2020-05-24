@@ -16,7 +16,7 @@ function GetSoldier(props) {
             let tempName = "undefined"
             return (
                 el.constructor === Array &&
-                <Col className="block-background" md={6} lg={3} style={colStyle} key={j}>
+                <Col className="block-background" sm={6} lg={3} style={colStyle} key={j}>
                     {el.map((val, i) => {
                         if (val.army[0].includes(props.armyType, "universal") || props.armyType === "all") {
                             return (

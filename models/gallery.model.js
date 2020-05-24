@@ -3,10 +3,11 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const gallerySchema = new Schema({
-    _id: { type: String, required: true },
-    name: { type: String},
-    about: { type: String},
-    links: { type: Array}
+    name: { type: String, required: true },
+    about: { type: String, required: true  },
+    date: { type: Number, required: true  },
+    links: { type: Array, required: true  },
+    showLink: { type: String, required: true  }
 })
 
 const Gallery = mongoose.model('Gallery', gallerySchema);

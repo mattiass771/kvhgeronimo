@@ -214,7 +214,7 @@ body {
   .about-image {
     margin-left: 10px;
     margin-bottom: 10px;
-    max-width: 250px;
+    max-width: 100%;
   }
 }
 

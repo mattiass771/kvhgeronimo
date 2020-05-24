@@ -2,13 +2,16 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import { withRouter } from "react-router-dom";
 
-import { Carousel, Image, Container, Card } from 'react-bootstrap';
+import { Carousel, Image, Container, Card, Row, Button } from 'react-bootstrap';
+
+import GalleryAddModal from './GalleryAddModal';
 
 class Gallery extends Component {
     constructor() {
         super()
         this.state = {
-            galleries: []
+            galleries: [],
+            popup: false
         }
     }
 
@@ -20,6 +23,10 @@ class Gallery extends Component {
         .catch(error => {
             console.log(error);
         });
+    }
+
+    togglePop = () => {
+        this.setState({ popup: !this.state.popup })
     }
 
     handleClick = (gal) => {
@@ -91,6 +98,11 @@ class Gallery extends Component {
     render() {
             return (
                 <Container>
+                    {localStorage.getItem("isAdmin") &&
+                    <Row className="justify-content-center">
+                        <Button variant="outline-dark" style={{marginBottom: "15px"}} onClick={this.togglePop}>Add Gallery</Button>
+                    </Row>}
+                    {this.state.popup && <GalleryAddModal toggleRefresh={this.toggleRefresh} togglePop={this.togglePop} />}
                     {this.getGallery()}
                 </Container>
             )

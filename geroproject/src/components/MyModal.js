@@ -82,6 +82,9 @@ ww2-soldier-warriors-theme-vector-2674766.jpg" fluid/> :
                         </Row>
                     </Container>
                 </Modal.Body>
+                <Modal.Footer>
+                    <Button variant="outline-dark" onClick={this.handleClose}>Close</Button>
+                </Modal.Footer>
             </Modal>
         );
     }

@@ -140,7 +140,13 @@ class Calendar extends Component {
                     <Card.Header style={{textAlign:"center", height: "350px"}}>
                         {this.state.deleteItem && <DeleteFromDb toggleRefresh={this.toggleRefresh} collectionID="calendar" itemID={this.state.passDeleteID} toggleDeleteItem={this.closeDeleteItem} />}
                         <Image style={{position: "absolute", top:"-41px"}} src="https://i.imgur.com/jawkXJV.png?3" fluid/>
-                        <Image src={calendar.link} fluid/>
+                        <Image style={{
+                                height: "325px",
+                                width: "auto",
+                                objectFit: "cover",
+                                objectPosition: "center",
+                                borderRadius: "5px",
+                                border: "0.5px solid whitesmoke"}} src={calendar.link} thumbnail fluid/>
                     </Card.Header>
                     <Card.Body style={{textAlign:"center"}} className={this.state.isOpen[i] ? this.state.fullCardClass : this.state.infoCardClass}>
                         <h4>{calendar.name}</h4>

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 
-import { Modal } from 'react-bootstrap';
+import { Modal, Button } from 'react-bootstrap';
 import ShowProfileInModal from './ShowProfileInModal';
 
 class ProfileModal extends Component {
@@ -31,9 +31,12 @@ class ProfileModal extends Component {
     render() {
         return (    
             <Modal size="lg" show={this.state.popup} onHide={this.handleClose}>
-                <Modal.Body className="soldier-background">
+                <Modal.Body className="block-background">
                     {this.state.soldierData && <ShowProfileInModal close={this.handleClose} soldierID={this.props.soldierID} soldierData={this.state.soldierData} />}
                 </Modal.Body>
+                <Modal.Footer className="block-background">
+                    <Button variant="outline-dark" onClick={this.handleClose}>Close</Button>
+                </Modal.Footer>
             </Modal>
         );
     }
