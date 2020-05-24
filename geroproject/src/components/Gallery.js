@@ -11,7 +11,9 @@ class Gallery extends Component {
         super()
         this.state = {
             galleries: [],
-            popup: false
+            popup: false,
+            deleteItem: false,
+            passDeleteID: ""
         }
     }
 
@@ -27,6 +29,14 @@ class Gallery extends Component {
 
     togglePop = () => {
         this.setState({ popup: !this.state.popup })
+    }
+
+    toggleDeleteItem = (e) => {
+        this.setState({ deleteItem: !this.state.deleteItem, passDeleteID: e.currentTarget.dataset.itemid })
+    }
+
+    closeDeleteItem = () => {
+        this.setState({ deleteItem: !this.state.deleteItem, passDeleteID: "" })
     }
 
     handleClick = (gal) => {
@@ -78,7 +88,10 @@ class Gallery extends Component {
             }
             galleryShow.push(
                 <Card key={i} className="block-background" style={{marginBottom: "15px", borderRadius:"5px"}}>
+                    {localStorage.getItem("isAdmin") &&
+                    <Button onClick={this.toggleDeleteItem} data-itemid={gallery._id} size="sm" variant="outline-dark" style={{width: "100%", height:"20px"}}><span style={{position:"relative", top:"-4px"}}>Delete</span></Button>}
                     <Card.Header>
+                        {this.state.deleteItem && <DeleteFromDb toggleRefresh={this.toggleRefresh} collectionID="gallery" itemID={this.state.passDeleteID} toggleDeleteItem={this.closeDeleteItem} />}
                         <h5 style={{textAlign: "center"}}>{gallery.name}</h5>
                         <Carousel style={{border:"3px solid whitesmoke", borderRadius:"5px"}} onClick={() => this.handleClick(gallery)} className="pointer-on-hover" interval={5000} controls={false} indicators={false} pause={false} >
                             {carouselItem}
