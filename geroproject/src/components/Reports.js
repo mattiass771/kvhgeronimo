@@ -142,7 +142,7 @@ class Reports extends Component {
             <>
                 {localStorage.getItem("isAdmin") &&
                 <Row className="justify-content-center">
-                    <Button variant="outline-dark" style={{marginBottom: "15px"}} onClick={this.togglePop}>Add Reports</Button>
+                    <Button variant="outline-dark" style={{marginBottom: "15px"}} onClick={this.togglePop}>Add Report</Button>
                 </Row>}
                 {this.state.popup ? <ReportsAddModal toggleRefresh={this.toggleRefresh} togglePop={this.togglePop} /> : false}
                 {this.getData()}
