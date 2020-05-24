@@ -5,6 +5,7 @@ import { withRouter } from "react-router-dom";
 import { Carousel, Image, Container, Card, Row, Button } from 'react-bootstrap';
 
 import GalleryAddModal from './GalleryAddModal';
+import DeleteFromDb from './DeleteFromDB';
 
 class Gallery extends Component {
     constructor() {
