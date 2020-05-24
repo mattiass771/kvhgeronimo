@@ -28,6 +28,17 @@ class Gallery extends Component {
         });
     }
 
+    toggleRefresh = () => {
+        axios.get(`https://kvhgeronimo.herokuapp.com/gallery/`)
+        .then(response => {
+            this.setState({ reports: response.data })
+            console.log("refreshed")
+        })
+        .catch(error => {
+            console.log(error);
+        });
+    }
+
     togglePop = () => {
         this.setState({ popup: !this.state.popup })
     }
