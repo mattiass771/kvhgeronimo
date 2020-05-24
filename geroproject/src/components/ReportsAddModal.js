@@ -12,7 +12,8 @@ class ReportsAddModal extends Component {
             actualLink: "",
             name: "",
             isOpen: false,
-            text: ""
+            text: "",
+            refresh: false
         }
     }
 
@@ -41,13 +42,24 @@ class ReportsAddModal extends Component {
         this.setState({ actualLink: "" })
     }
 
+    deleteLink = (e) => {
+        this.state.links.splice(this.state.links.indexOf(e.currentTarget.dataset.deletelink),1)
+        this.setState({ refresh: !this.state.refresh })
+    }
+
     showLinks = () => {
         let i = 0;
         let output = []
         for (let link of this.state.links) {
             i++
             output.push(
-                <p key={this.state.links.indexOf(link)}><strong>{i}.&nbsp;</strong>{link}&nbsp;</p>
+                <span>
+                    <p key={this.state.links.indexOf(link)}>
+                        <Button variant="outline-dark" data-deletelink={link} size="sm" onClick={this.deleteLink}>X</Button>&nbsp;&nbsp;
+                        <strong>{i}.&nbsp;</strong>
+                        {link}&nbsp;
+                    </p>
+                </span>
             )
         }
         return output
