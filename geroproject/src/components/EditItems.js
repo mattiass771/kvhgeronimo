@@ -20,6 +20,7 @@ function EditItems(props) {
                             axios.post(`https://kvhgeronimo.herokuapp.com/soldier/update/${localStorage.getItem("id")}`, {equip})
                                 .then(res => {
                                     console.log(res.data)
+                                    props.refresh()
                                 })
                                 .catch(err => {
                                     console.log(err)
@@ -68,7 +69,7 @@ function EditItems(props) {
                     // console.log(elem, arr)
                     if (elem[4] !== undefined && elem[0] === typ && (elem[4].includes(army, "universal") || army === "all")) {
                         onShow.push(
-                            <span key={elem[2]} onClick={props.refresh}>
+                            <span key={elem[2]}>
                                 <p lg={8} className="para" data-header={elem[1]} data-short={elem[2]} onClick={props.togglePop}>
                                     {elem[1]}
                                 </p>
@@ -82,7 +83,7 @@ function EditItems(props) {
                         )
                     }
             }
-            
+            typ &&
             final.push(
                 <span key={typ}>
                     <h3>{onShow.splice(0,1)}</h3>

@@ -35,7 +35,7 @@ class Gallery extends Component {
         for (let gallery of this.state.galleries) {
             slide = []
             for (let link of gallery.links) {
-                if ((gallery.links.indexOf(link)%4 === 0 && gallery.links.indexOf(link) !== 0)) {
+                if ((gallery.links.indexOf(link)%2 === 0 && gallery.links.indexOf(link) !== 0)) {
                     carouselItem.push(
                         <Carousel.Item key={gallery.links.indexOf(link)}>
                             {slide}
@@ -47,7 +47,7 @@ class Gallery extends Component {
                         <Image
                             key={gallery.links.indexOf(link)}
                             style= {{objectFit:"cover", height: "150px"}}
-                            className="w-25"
+                            className="w-50"
                             alt="geronimo"
                             src={link}
                         />
@@ -63,7 +63,7 @@ class Gallery extends Component {
                         <Image
                             key={gallery.links.indexOf(link)}
                             style= {{objectFit:"cover", height: "150px"}}
-                            className="w-25"
+                            className="w-50"
                             alt="geronimo"
                             src={link}
                         />

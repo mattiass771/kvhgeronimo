@@ -73,7 +73,6 @@ class UpdateItems extends Component {
     render() {
         return (
             <Container>
-                {console.log(this.state.soldierData.isAdmin)}
                 {this.state.popup ? <MyModal item={this.state.actualItem} popup={this.state.popup} fadePop={this.fadePop} /> : null}
                 {this.state.soldierData.isAdmin && 
                 (localStorage.getItem("isAdmin") ? <Button style={{position:"relative", float:"right"}} onClick={this.removeAdmin} variant="outline-dark">Admin Mode: ON</Button> : <Button style={{position:"relative", float:"right"}} onClick={this.addAdmin} variant="outline-dark">Admin Mode: OFF</Button>)}
