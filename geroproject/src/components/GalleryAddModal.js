@@ -56,7 +56,7 @@ class GalleryAddModal extends Component {
         for (let link of this.state.links) {
             i++
             output.push(
-                <span key={this.state.links.indexOf(link)}><strong>{i}.&nbsp;</strong>{link}&nbsp;</span>
+                <p key={this.state.links.indexOf(link)}><strong>{i}.&nbsp;</strong>{link}&nbsp;</p>
             )
         }
         return output
@@ -117,7 +117,7 @@ class GalleryAddModal extends Component {
                                 placeholder="Direct Link to Image"
                             />
                             <Button variant="outline-dark" style={{ top:"10px" }} size="sm" onClick={this.addLink}>Add Link</Button>
-                            <p>{this.showLinks()}</p>
+                            {this.showLinks()}
                         </form>
                         <Button variant="dark" style={{ width: "100%" }} onClick={this.addGallery}>Upload Gallery</Button>
                     </Container>
