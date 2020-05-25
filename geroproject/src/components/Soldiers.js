@@ -76,6 +76,14 @@ class Soldiers extends Component {
         this.setState({ [name]: value, joinData: [] })
     }
 
+    getSoldierForm = () => {
+        let output = []
+        this.state.soldiers.map((val, i) => {
+            output.push(<option key={i} value={val.name}>{val.nameFull}</option>) 
+        })
+        return output
+    }
+
     render() { 
         // DECLARE STATE VARS INTO VARS
         const equipData = this.state.equipment;
@@ -131,11 +139,12 @@ class Soldiers extends Component {
                                 name="soldier"
                             >   
                                 <option value=""></option>
-                                <option value="johnfdavis">John F. Davis</option>
+                                {this.getSoldierForm()}
+                                {/* <option value="johnfdavis">John F. Davis</option>
                                 <option value="matthewoconnor">Matthew O' Connor</option>
                                 <option value="peterjnash">Peter J. Nash</option>
                                 <option value="lucaswurfl">Lucas Wurfl</option>
-                                <option value="thomasjholes">Thomas J. Holes</option>
+                                <option value="thomasjholes">Thomas J. Holes</option> */}
                             </select>
                         </form>
                     </Col>  

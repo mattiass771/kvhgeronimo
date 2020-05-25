@@ -45,7 +45,7 @@ class Platoon extends Component {
         let final = []
         for (let el in this.state.soldierData) {
             let tempSoldier = this.state.soldierData[el]
-            if (!squads.includes(tempSoldier.squad)) squads.push(tempSoldier.squad)
+            if (!squads.includes(tempSoldier.squad) && tempSoldier.squad !== "test") squads.push(tempSoldier.squad)
         }
         for (let el of squads) {
             onShow.push(el)

@@ -2,6 +2,7 @@ const express = require('express');
 const cors = require('cors');
 const mongoose = require('mongoose');
 const path = require('path');
+const fileUpload = require('express-fileupload')
 
 require('dotenv').config();
 
@@ -34,6 +35,24 @@ app.use('/gallery', galleryRouter);
 app.use('/aboutUs', aboutUsRouter);
 app.use('/reports', reportsRouter);
 app.use('/calendar', calendarRouter);
+app.use(fileUpload())
+
+//Upload Endpoint
+app.post('/fileUpload', (req, res) => {
+    if(req.files === null) {
+        return res.status(400).json({ msg: 'No file uploaded' });
+    }
+
+    const file = req.files.file;
+    file.mv(`${__dirname}/geroproject/public/uploads/${file.name}`, err => {
+        if(err) {
+            console.error(err);
+            return res.status(500).send(err);
+        }
+
+        res.json({ fileName: file.name, filePath: `/uploads/${file.name}` })
+    });
+});
 
 if (process.env.NODE_ENV === 'production') {
     app.use(express.static('geroproject/build'));

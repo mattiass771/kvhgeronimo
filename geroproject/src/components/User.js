@@ -4,6 +4,7 @@ import axios from 'axios';
 import EditItems from './EditItems';
 import MyModal from './MyModal';
 import Profile from './Profile';
+import Files from './Files';
 
 import { Tab, Tabs, Container, Button } from 'react-bootstrap';
 
@@ -85,6 +86,12 @@ class UpdateItems extends Component {
                         <br />
                         {this.state.equipment.length > 0 && <EditItems refresh={this.refreshProps} togglePop={this.togglePop} equip={this.state.equipment} soldier={this.state.soldier} />}
                     </Tab>
+                    {this.state.soldierData.isAdmin && 
+                    (localStorage.getItem("isAdmin") &&
+                    <Tab className="soldier-background" eventKey="files" title="Documents">
+                        <br />
+                        <Files refresh={this.refreshProps} />
+                    </Tab>)}
                 </Tabs>
             </Container>
         )
