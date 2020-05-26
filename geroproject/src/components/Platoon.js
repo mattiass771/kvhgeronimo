@@ -2,7 +2,9 @@ import React, { Component } from 'react';
 import axios from 'axios';
 
 import ProfileModal from './ProfileModal';
-import { Image, Container, Row, Col } from 'react-bootstrap';
+import DeleteFromDb from './DeleteFromDB';
+import PlatoonAddSoldierModal from './PlatoonAddSoldierModal';
+import { Image, Container, Row, Col, Button } from 'react-bootstrap';
 
 class Platoon extends Component {
     constructor() {
@@ -10,8 +12,22 @@ class Platoon extends Component {
         this.state = {
             popup: false,
             soldierID: "",
-            soldierData: {}
+            soldierData: {},
+            addSoldier: false,
+            deleteItem: false,
+            passDeleteID: ""
         }
+    }
+
+    toggleRefresh = () => {
+        axios.get(`https://kvhgeronimo.herokuapp.com/soldier/`)
+            .then(response => {
+                this.setState({ soldierData: response.data })
+                console.log("refreshed")
+            })
+            .catch(error => {
+                console.log(error);
+            });
     }
 
     componentDidMount() {
@@ -29,15 +45,27 @@ class Platoon extends Component {
         this.togglePop()
     }
 
-    //POPUP HANDLERS (1,2)
-    //1
+    //POPUP HANDLERS 
     togglePop = () => {
         this.setState({ popup: !this.state.popup })
     }
-    //2
+
     fadePop = () => {
         this.setState({ popup: !this.state.popup })
     }
+    
+    toggleAddSoldier = () => {
+        this.setState({ addSoldier: !this.state.addSoldier })
+    }
+    
+    toggleDeleteItem = (e) => {
+        this.setState({ deleteItem: !this.state.deleteItem, passDeleteID: e.currentTarget.dataset.itemid })
+    }
+
+    closeDeleteItem = () => {
+        this.setState({ deleteItem: !this.state.deleteItem, passDeleteID: "" })
+    }
+    //
 
     getSoldiers = () => {
         let squads = ["HQ"]
@@ -55,6 +83,8 @@ class Platoon extends Component {
                     onShow.push(
                         <span key={tempData._id}>
                             <Row>
+                                {localStorage.getItem("isAdmin") &&
+                                <Button onClick={this.toggleDeleteItem} data-itemid={tempData._id} size="sm" variant="outline-dark" style={{marginLeft:"20px" ,width: "80%", height:"15px"}}><span style={{position:"relative", top:"-7px"}}>Delete</span></Button>}
                                 <Col xs={4}>
                                     <Image style={{marginLeft:"5px"}} src={tempData.imageURL ? tempData.imageURL : 
 "https://i.ibb.co/RYtTKY1/emptypicture.jpg"} thumbnail fluid/>
@@ -97,6 +127,12 @@ class Platoon extends Component {
     render() {
         return (
             <Container>
+                {localStorage.getItem("isAdmin") &&
+                <Row className="justify-content-center">
+                    <Button variant="outline-dark" style={{marginBottom: "15px"}} onClick={this.toggleAddSoldier}>Add Soldier</Button>
+                </Row>}
+                {this.state.deleteItem && <DeleteFromDb toggleRefresh={this.toggleRefresh} collectionID="soldier" itemID={this.state.passDeleteID} toggleDeleteItem={this.closeDeleteItem} />}
+                {this.state.addSoldier ? <PlatoonAddSoldierModal toggleRefresh={this.toggleRefresh} toggleAddSoldier={this.toggleAddSoldier} /> : false}
                 {this.getSoldiers()}
                 {this.state.popup ? <ProfileModal popup={this.state.popup} fadePop={this.fadePop} soldierID={this.state.soldierID} /> : null}
             </Container>

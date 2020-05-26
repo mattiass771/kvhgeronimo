@@ -5,9 +5,9 @@ const Schema = mongoose.Schema;
 const soldierSchema = new Schema({
     _id: { type: String, required: true },
     nameFull: { type: String},
-    completeName: { type: String},
-    name: { type: String },
-    password: { type: String },
+    completeName: { type: String, required: true},
+    name: { type: String, required: true },
+    password: { type: String, required: true },
     rank: { type: String },
     state: { type: String },
     birth: { type: String },
