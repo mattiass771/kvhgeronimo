@@ -1,7 +1,9 @@
 import React, { Component, Fragment } from 'react';
 import axios from 'axios';
 
-import { Button, Row, Col, Image } from 'react-bootstrap';
+import { Button, Row, Col, Form, ProgressBar } from 'react-bootstrap';
+
+import { FaFileExcel, FaFilePdf, FaFileWord, FaFileImage, FaFileAlt, FaFilePowerpoint, FaFileArchive } from 'react-icons/fa';
 
 class Files extends Component {
     constructor(props) {
@@ -9,9 +11,10 @@ class Files extends Component {
         this.state = {
             file: '',
             filename: 'Choose File',
-            uploadedFile: {},
+            uploadedFile: "",
             checkFiles: [],
-            refresh: false
+            refresh: false,
+            uploadPercentage: 0
         }
     }
 
@@ -21,7 +24,7 @@ class Files extends Component {
                 this.state.checkFiles.length < 1 &&
                 this.setState({ checkFiles: res.data.outputArr })
             })
-            .then(err => {
+            .catch(err => {
                 console.log(err)
             })
     }
@@ -34,7 +37,7 @@ class Files extends Component {
                 this.setState({ checkFiles: res.data.outputArr })
                 this.setState({ refresh: false })
             })
-            .then(err => {
+            .catch(err => {
                 console.log(err)
             })
     }
@@ -48,11 +51,15 @@ class Files extends Component {
             const res = await axios.post('https://kvhgeronimo.herokuapp.com/fileUpload', formData, {
                 headers: {
                     'Content-Type': 'multipart/form-data'
+                },
+                onUploadProgress: progressEvent => {
+                    this.setState({ uploadPercentage: parseInt(Math.round((progressEvent.loaded * 100) / progressEvent.total)) });
+                    this.state.uploadPercentage === 100 && setTimeout(() => this.setState({ uploadPercentage: 0 }), 4000);
                 }
             });
 
-            const { fileName, filePath } = res.data;
-            this.setState({ uploadedFile: {fileName, filePath} })
+            const { fileName } = res.data;
+            this.setState({ uploadedFile: fileName })
             this.refreshFiles()
         } catch(err) {
             if(err.response.status === 500) {
@@ -64,7 +71,6 @@ class Files extends Component {
     }
 
     downloadFile = file => {
-        console.log("download: ", file)
         axios.get(`https://kvhgeronimo.herokuapp.com/download`, {
             headers: {
                 'Content-Type': 'application/json'
@@ -76,13 +82,16 @@ class Files extends Component {
                 console.log('Downloading')
                 this.refreshFiles()
             })
-            .then(err => {
-                console.log(err)
+            .catch(err => {
+                if (err.response.status === 404) {
+                    console.log("deleted.")
+                } else {
+                    console.log(err)
+                }
             })
     }
 
     deleteFile = file => {
-        console.log("delete: ", file)
         axios.get(`https://kvhgeronimo.herokuapp.com/delete`, {
             headers: {
                 'Content-Type': 'application/json'
@@ -93,24 +102,38 @@ class Files extends Component {
                 console.log('Deleting')
                 this.refreshFiles()
             })
-            .then(err => {
+            .catch(err => {
                 console.log(err)
             })
     }
 
     showFiles = () => {
         let output = []
+        let suffix = ""
         this.state.checkFiles.map((val, i) => {
+            suffix = val.split('.')
             output.push(
-                <Col className="pointer-on-hover" md={3} key={i}>
+                <Col className="pointer-on-hover" xs={6} md={3} lg={2} key={i}>
+                    <Button size="sm" variant="outline-dark" onClick={() => this.deleteFile(val)} >Delete</Button>
                     <span onClick={() => this.downloadFile(val)}>
-                    <Image 
-                        src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcQnMrUHMq61az8YEm6kg8XHJoOSvAuJWA0j1r0TdUQ-A__FJ3oj&usqp=CAU" 
-                        fluid
-                    />
-                    <p>{val}</p>
+                    {
+                    // SHOW IMAGE ICON
+                    ["jpg", "jpeg", "png", "bmp"].includes(suffix[suffix.length-1]) ? <FaFileImage style={{height:"100px", width:"100%", marginTop: "5px", marginBottom: "5px"}} fluid="true" /> :
+                    // SHOW PDF ICON
+                    ["pdf", "svg"].includes(suffix[suffix.length-1]) ? <FaFilePdf style={{height:"100px", width:"100%", marginTop: "5px", marginBottom: "5px"}} fluid="true" /> :
+                    // SHOW EXCEL ICON
+                    ["xls", "xlsx", "xlsb", "xlsm"].includes(suffix[suffix.length-1]) ? <FaFileExcel style={{height:"100px", width:"100%", marginTop: "5px", marginBottom: "5px"}} fluid="true" /> : 
+                    // SHOW WORD ICON
+                    ["doc", "docx", "docm"].includes(suffix[suffix.length-1]) ? <FaFileWord style={{height:"100px", width:"100%", marginTop: "5px", marginBottom: "5px"}} fluid="true" /> :
+                    // SHOW ARCHIVE ICON
+                    ["zip", "rar"].includes(suffix[suffix.length-1]) ? <FaFileArchive style={{height:"100px", width:"100%", marginTop: "5px", marginBottom: "5px"}} fluid="true" /> :
+                    // SHOW POWERPOINT ICON
+                    ["pptx", "pptm", "ppt"].includes(suffix[suffix.length-1]) ? <FaFilePowerpoint style={{height:"100px", width:"100%", marginTop: "5px", marginBottom: "5px"}} fluid="true" /> :
+                    // SHOW ALT ICON
+                    <FaFileAlt style={{height:"100px", width:"100%", marginTop: "5px", marginBottom: "5px"}} fluid="true" />
+                    }
+                    <p style={{textAlign:"center", overflow:"hidden", height: "40px"}}>{val}</p>
                     </span>
-                    <Button onClick={() => this.deleteFile(val)} ></Button>
                 </Col>
             )
         })
@@ -118,29 +141,39 @@ class Files extends Component {
     }
 
     handleChange = (event) => {
-        this.setState({ file: event.target.files[0], filename: event.target.files[0].name })
+        event.currentTarget.files[0] && this.setState({ file: event.currentTarget.files[0], fileName: event.currentTarget.files[0].name })
+    }
+
+    resetUploadedState = () => {
+        this.setState({ uploadedFile: "" })
+    }
+
+    showMessage = () => {
+        return (
+        <Row style={{marginBottom: "15px"}}>
+            <Col style={{ textAlign:"center", backgroundColor:"whitesmoke", margin: "0px 15%", maxHeight:"50px", overflow: "hidden", borderRadius: "15px"}}>
+                <h5 style={{textAlign:"center"}}>Upload successful! <br/> {this.state.fileName}</h5>
+                {setTimeout(() => this.resetUploadedState(), 3750)}
+            </Col>
+        </Row>
+        )
     }
 
     render() {
         return (
             <Fragment>
-                {this.state.uploadedFile.fileName && 
+                {this.state.uploadedFile && this.showMessage()}
                 <Row>
-                    <Col>
-                        <h5 style={{textAlign:"center"}}>Upload successful - {this.state.uploadedFile.fileName}</h5>
-                    </Col>
-                </Row>}
-                <Row>
-                    <form onSubmit={this.handleUpload}> 
-                        <input
-                            type="file"
+                    <Form style={{marginLeft:"20px"}} onSubmit={this.handleUpload}> 
+                        <Form.File
                             onChange={this.handleChange}
                             name="uploadFile"
-                            placeholder={this.state.filename}
+                            style={{float: "left", marginLeft: "10px"}}
                         />
-                        <Button type="submit">Upload File</Button>
-                    </form>
+                        <Button style={{marginLeft:"20px"}} size="sm" variant="dark" type="submit">Upload File</Button>
+                    </Form>
                 </Row>
+                <ProgressBar variant="dark" style={{margin:"5px 0px", background: "transparent"}} now={this.state.uploadPercentage} />
                 <Row style={{padding:"15px"}}>
                     {this.showFiles()}
                 </Row>
