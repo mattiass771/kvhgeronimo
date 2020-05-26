@@ -1,7 +1,7 @@
 import React, { Component, Fragment } from 'react';
 import axios from 'axios';
 
-import { Button, Row, Col } from 'react-bootstrap';
+import { Button, Row, Col, Image } from 'react-bootstrap';
 
 class Files extends Component {
     constructor(props) {
@@ -9,12 +9,34 @@ class Files extends Component {
         this.state = {
             file: '',
             filename: 'Choose File',
-            uploadedFile: {}
+            uploadedFile: {},
+            checkFiles: [],
+            refresh: false
         }
     }
 
-    showUploads = () => {
-        axios.get()
+    componentDidMount() {
+        axios.get(`http://localhost:5000/getFiles`)
+            .then(res => {
+                this.state.checkFiles.length < 1 &&
+                this.setState({ checkFiles: res.data.outputArr })
+            })
+            .then(err => {
+                console.log(err)
+            })
+    }
+
+    refreshFiles = () => {
+        this.setState({ refresh: true })
+        axios.get(`http://localhost:5000/getFiles`)
+            .then(res => {
+                this.state.refresh &&
+                this.setState({ checkFiles: res.data.outputArr })
+                this.setState({ refresh: false })
+            })
+            .then(err => {
+                console.log(err)
+            })
     }
 
     handleUpload = async e => {
@@ -31,6 +53,7 @@ class Files extends Component {
 
             const { fileName, filePath } = res.data;
             this.setState({ uploadedFile: {fileName, filePath} })
+            this.refreshFiles()
         } catch(err) {
             if(err.response.status === 500) {
                 console.log('There was a problem with the server');
@@ -38,6 +61,60 @@ class Files extends Component {
                 console.log(err.response.data.msg)
             }
         }
+    }
+
+    downloadFile = file => {
+        console.log("download: ", file)
+        axios.get(`http://localhost:5000/download`, {
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            params: file
+        })
+            .then(() => {
+                window.open(`http://localhost:5000/download?0=${file}`)
+                console.log('Downloading')
+                this.refreshFiles()
+            })
+            .then(err => {
+                console.log(err)
+            })
+    }
+
+    deleteFile = file => {
+        console.log("delete: ", file)
+        axios.get(`http://localhost:5000/delete`, {
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            params: file
+        })
+            .then(() => {
+                console.log('Deleting')
+                this.refreshFiles()
+            })
+            .then(err => {
+                console.log(err)
+            })
+    }
+
+    showFiles = () => {
+        let output = []
+        this.state.checkFiles.map((val, i) => {
+            output.push(
+                <Col className="pointer-on-hover" md={3} key={i}>
+                    <span onClick={() => this.downloadFile(val)}>
+                    <Image 
+                        src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcQnMrUHMq61az8YEm6kg8XHJoOSvAuJWA0j1r0TdUQ-A__FJ3oj&usqp=CAU" 
+                        fluid
+                    />
+                    <p>{val}</p>
+                    </span>
+                    <Button onClick={() => this.deleteFile(val)} ></Button>
+                </Col>
+            )
+        })
+        return output
     }
 
     handleChange = (event) => {
@@ -53,15 +130,20 @@ class Files extends Component {
                         <h5 style={{textAlign:"center"}}>Upload successful - {this.state.uploadedFile.fileName}</h5>
                     </Col>
                 </Row>}
-                <form onSubmit={this.handleUpload}> 
-                    <input
-                        type="file"
-                        onChange={this.handleChange}
-                        name="uploadFile"
-                        placeholder={this.state.filename}
-                    />
-                    <Button type="submit">Upload File</Button>
-                </form>
+                <Row>
+                    <form onSubmit={this.handleUpload}> 
+                        <input
+                            type="file"
+                            onChange={this.handleChange}
+                            name="uploadFile"
+                            placeholder={this.state.filename}
+                        />
+                        <Button type="submit">Upload File</Button>
+                    </form>
+                </Row>
+                <Row style={{padding:"15px"}}>
+                    {this.showFiles()}
+                </Row>
             </Fragment>
         )
     }

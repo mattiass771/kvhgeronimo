@@ -2,6 +2,8 @@ const express = require('express');
 const cors = require('cors');
 const mongoose = require('mongoose');
 const path = require('path');
+const fs = require('fs');
+const mime = require('mime');
 const fileUpload = require('express-fileupload')
 
 require('dotenv').config();
@@ -50,9 +52,50 @@ app.post('/fileUpload', (req, res) => {
             return res.status(500).send(err);
         }
 
-        res.json({ fileName: file.name, filePath: `/uploads/${file.name}` })
+        res.json({ fileName: file.name, filePath: `/uploads/${file.name}` });
     });
 });
+
+//Get Files from uploads
+app.get('/getFiles', (req, res) => {
+
+    const dirPath = path.join(__dirname, 'geroproject', 'public', 'uploads');
+
+    fs.readdir(dirPath, (err, files) => {
+        if (err) {
+            return console.log(`Unable to scan directory: ${err}`);
+        }
+        if (files) {
+            const outputArr = []
+            files.forEach(file => {
+                outputArr.push(file)
+            })
+            console.log(outputArr)
+            return res.json( {outputArr} )
+        }
+    })
+});
+
+//Download Files from uploads
+app.get('/download', function(req, res){
+    const file = req.query[0];
+    const filePath = `${__dirname}/geroproject/public/uploads/${file}`;
+    res.download(filePath, file);
+});
+
+//Delete a File from uploads
+app.get('/delete', function(req, res){
+    const file = req.query[0];
+    const filePath = `${__dirname}/geroproject/public/uploads/${file}`;
+    fs.unlink(filePath, () => {
+        res.send ({
+            status: "200",
+            responseType: "string",
+            response: "success"
+        });
+    });
+});
+
 
 if (process.env.NODE_ENV === 'production') {
     app.use(express.static('geroproject/build'));
