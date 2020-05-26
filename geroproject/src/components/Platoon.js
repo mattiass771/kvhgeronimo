@@ -68,7 +68,7 @@ class Platoon extends Component {
     //
 
     getSoldiers = () => {
-        let squads = ["HQ"]
+        let squads = ["HQ", "WAC"]
         let onShow = []
         let final = []
         for (let el in this.state.soldierData) {

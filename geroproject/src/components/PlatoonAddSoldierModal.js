@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import equipObject from '../equipobject.json';
+import equipObjectWAC from '../equipobjectWAC.json';
 
 import { Modal, Button, Container } from 'react-bootstrap';
 
@@ -25,7 +26,7 @@ class CalendarAddModal extends Component {
             squad: "",
             func: "",
             imageURL: "",
-            equip: equipObject
+            equip: {}
         }
     }
 
@@ -40,6 +41,7 @@ class CalendarAddModal extends Component {
     }
 
     addReport = () => {
+        this.state.squad === "WAC" ? this.setState({ equip: equipObjectWAC }) : this.setState({ equip: equipObject })
         axios.post(`https://kvhgeronimo.herokuapp.com/soldier/add`, { 
                 _id: this.state._id, 
                 password: this.state._id, 
