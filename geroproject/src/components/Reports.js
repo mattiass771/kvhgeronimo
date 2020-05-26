@@ -103,7 +103,6 @@ class Reports extends Component {
                     {localStorage.getItem("isAdmin") &&
                     <Button onClick={this.toggleDeleteItem} data-itemid={report._id} size="sm" variant="outline-dark" style={{width: "100%", height:"20px"}}><span style={{position:"relative", top:"-4px"}}>Delete</span></Button>}
                     <Card.Header>
-                        {this.state.deleteItem && <DeleteFromDb toggleRefresh={this.toggleRefresh} collectionID="reports" itemID={this.state.passDeleteID} toggleDeleteItem={this.closeDeleteItem} />}
                         <Carousel interval={null}>
                             {links}
                         </Carousel>
@@ -144,6 +143,7 @@ class Reports extends Component {
                 <Row className="justify-content-center">
                     <Button variant="outline-dark" style={{marginBottom: "15px"}} onClick={this.togglePop}>Add Report</Button>
                 </Row>}
+                {this.state.deleteItem && <DeleteFromDb toggleRefresh={this.toggleRefresh} collectionID="reports" itemID={this.state.passDeleteID} toggleDeleteItem={this.closeDeleteItem} />}
                 {this.state.popup ? <ReportsAddModal toggleRefresh={this.toggleRefresh} togglePop={this.togglePop} /> : false}
                 {this.getData()}
                 {this.getReports()}

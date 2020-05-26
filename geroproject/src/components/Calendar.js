@@ -138,7 +138,6 @@ class Calendar extends Component {
                     {localStorage.getItem("isAdmin") &&
                     <Button onClick={this.toggleDeleteItem} data-itemid={calendar._id} size="sm" variant="outline-dark" style={{width: "100%", height:"20px"}}><span style={{position:"relative", top:"-4px"}}>Delete</span></Button>}
                     <Card.Header style={{textAlign:"center", height: "350px"}}>
-                        {this.state.deleteItem && <DeleteFromDb toggleRefresh={this.toggleRefresh} collectionID="calendar" itemID={this.state.passDeleteID} toggleDeleteItem={this.closeDeleteItem} />}
                         <Image style={{position: "absolute", top:"-41px"}} src="https://i.imgur.com/jawkXJV.png?3" fluid/>
                         <Image style={{
                                 height: "325px",
@@ -196,6 +195,7 @@ class Calendar extends Component {
                 <Row className="justify-content-center">
                     <Button variant="outline-dark" style={{marginBottom: "15px"}} onClick={this.toggleAddEvent}>Add Event</Button>
                 </Row>}
+                {this.state.deleteItem && <DeleteFromDb toggleRefresh={this.toggleRefresh} collectionID="calendar" itemID={this.state.passDeleteID} toggleDeleteItem={this.closeDeleteItem} />}
                 {this.state.addEvent ? <CalendarAddModal toggleRefresh={this.toggleRefresh} toggleAddEvent={this.toggleAddEvent} /> : false}
                 {this.state.popup ? <CalendarLocationModal mapLink={this.state.passMapLink} closePop={this.closePop} togglePop={this.togglePop} /> : false}
                 {this.state.items ? <CalendarCompareModal army={this.state.passArmy} soldierID={this.state.passSoldID} closeItems={this.closeItems} openItems={this.openItems} /> : false}

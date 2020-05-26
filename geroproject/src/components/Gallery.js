@@ -103,7 +103,6 @@ class Gallery extends Component {
                     {localStorage.getItem("isAdmin") &&
                     <Button onClick={this.toggleDeleteItem} data-itemid={gallery._id} size="sm" variant="outline-dark" style={{width: "100%", height:"20px"}}><span style={{position:"relative", top:"-4px"}}>Delete</span></Button>}
                     <Card.Header>
-                        {this.state.deleteItem && <DeleteFromDb toggleRefresh={this.toggleRefresh} collectionID="gallery" itemID={this.state.passDeleteID} toggleDeleteItem={this.closeDeleteItem} />}
                         <h5 style={{textAlign: "center"}}>{gallery.name}</h5>
                         <Carousel style={{border:"3px solid whitesmoke", borderRadius:"5px"}} onClick={() => this.handleClick(gallery)} className="pointer-on-hover" interval={5000} controls={false} indicators={false} pause={false} >
                             {carouselItem}
@@ -127,6 +126,7 @@ class Gallery extends Component {
                     <Row className="justify-content-center">
                         <Button variant="outline-dark" style={{marginBottom: "15px"}} onClick={this.togglePop}>Add Gallery</Button>
                     </Row>}
+                    {this.state.deleteItem && <DeleteFromDb toggleRefresh={this.toggleRefresh} collectionID="gallery" itemID={this.state.passDeleteID} toggleDeleteItem={this.closeDeleteItem} />}
                     {this.state.popup && <GalleryAddModal toggleRefresh={this.toggleRefresh} togglePop={this.togglePop} />}
                     {this.getGallery()}
                 </Container>

@@ -14,7 +14,8 @@ class Files extends Component {
             uploadedFile: "",
             checkFiles: [],
             refresh: false,
-            uploadPercentage: 0
+            uploadPercentage: 0,
+            deleteFiles: false
         }
     }
 
@@ -114,7 +115,7 @@ class Files extends Component {
             suffix = val.split('.')
             output.push(
                 <Col className="pointer-on-hover" xs={6} md={3} lg={2} key={i}>
-                    <Button size="sm" variant="outline-dark" onClick={() => this.deleteFile(val)} >Delete</Button>
+                    {this.state.deleteFiles && <Button size="sm" variant="outline-dark" onClick={() => this.deleteFile(val)} >Delete</Button>}
                     <span onClick={() => this.downloadFile(val)}>
                     {
                     // SHOW IMAGE ICON
@@ -159,23 +160,34 @@ class Files extends Component {
         )
     }
 
+    toggleDelMode = () => {
+        this.setState({ deleteFiles: !this.state.deleteFiles })
+    }
+
     render() {
         return (
             <Fragment>
                 {this.state.uploadedFile && this.showMessage()}
                 <Row>
-                    <Form style={{marginLeft:"20px"}} onSubmit={this.handleUpload}> 
-                        <Form.File
-                            onChange={this.handleChange}
-                            name="uploadFile"
-                            style={{float: "left", marginLeft: "10px"}}
-                        />
-                        <Button style={{marginLeft:"20px"}} size="sm" variant="dark" type="submit">Upload File</Button>
-                    </Form>
+                    <Col>
+                        <Form onSubmit={this.handleUpload}> 
+                            <Form.File
+                                onChange={this.handleChange}
+                                name="uploadFile"
+                                style={{float: "left", marginLeft: "10px"}}
+                            />
+                            <Button style={{marginLeft:"20px"}} size="sm" variant="dark" type="submit">Upload File</Button>
+                        </Form>
+                    </Col>
                 </Row>
                 <ProgressBar variant="dark" style={{margin:"5px 0px", background: "transparent"}} now={this.state.uploadPercentage} />
                 <Row style={{padding:"15px"}}>
                     {this.showFiles()}
+                </Row>
+                <Row style={{textAlign: "center"}}>
+                    <Col>
+                        {this.state.deleteFiles ? <Button size='sm' variant="outline-dark" onClick={this.toggleDelMode}>Done Deleting</Button> : <Button variant="outline-dark" size='sm' onClick={this.toggleDelMode}>Delete Mode</Button>}
+                    </Col>
                 </Row>
             </Fragment>
         )
