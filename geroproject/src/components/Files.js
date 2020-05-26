@@ -16,7 +16,7 @@ class Files extends Component {
     }
 
     componentDidMount() {
-        axios.get(`http://localhost:5000/getFiles`)
+        axios.get(`https://kvhgeronimo.herokuapp.com/getFiles`)
             .then(res => {
                 this.state.checkFiles.length < 1 &&
                 this.setState({ checkFiles: res.data.outputArr })
@@ -28,7 +28,7 @@ class Files extends Component {
 
     refreshFiles = () => {
         this.setState({ refresh: true })
-        axios.get(`http://localhost:5000/getFiles`)
+        axios.get(`https://kvhgeronimo.herokuapp.com/getFiles`)
             .then(res => {
                 this.state.refresh &&
                 this.setState({ checkFiles: res.data.outputArr })
@@ -45,7 +45,7 @@ class Files extends Component {
         formData.append('file', this.state.file)
 
         try {
-            const res = await axios.post('http://localhost:5000/fileUpload', formData, {
+            const res = await axios.post('https://kvhgeronimo.herokuapp.com/fileUpload', formData, {
                 headers: {
                     'Content-Type': 'multipart/form-data'
                 }
@@ -65,14 +65,14 @@ class Files extends Component {
 
     downloadFile = file => {
         console.log("download: ", file)
-        axios.get(`http://localhost:5000/download`, {
+        axios.get(`https://kvhgeronimo.herokuapp.com/download`, {
             headers: {
                 'Content-Type': 'application/json'
             },
             params: file
         })
             .then(() => {
-                window.open(`http://localhost:5000/download?0=${file}`)
+                window.open(`https://kvhgeronimo.herokuapp.com/download?0=${file}`)
                 console.log('Downloading')
                 this.refreshFiles()
             })
@@ -83,7 +83,7 @@ class Files extends Component {
 
     deleteFile = file => {
         console.log("delete: ", file)
-        axios.get(`http://localhost:5000/delete`, {
+        axios.get(`https://kvhgeronimo.herokuapp.com/delete`, {
             headers: {
                 'Content-Type': 'application/json'
             },
