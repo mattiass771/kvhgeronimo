@@ -71,9 +71,27 @@ class Reports extends Component {
         let colLeft = []
         let colRight = []
         let i = 0
+        const getVideoLink = (l) => {
+            let linkTag = l.split("watch?v=")
+            let finalLink = `https://www.youtube.com/embed/${linkTag[1]}`
+            return finalLink
+        }
         for (let report of this.state.reports) {
             let links = []
             for (let link of report.links) {
+                link.includes("youtube") ?
+                links.push(
+                    <Carousel.Item key={link}>
+                        <iframe 
+                            width="100%" 
+                            height="300px" 
+                            src={getVideoLink(link)}
+                            frameBorder="0"
+                            title={link}
+                            >
+                        </iframe>
+                    </Carousel.Item>
+                ) :
                 links.push(
                     <Carousel.Item key={link}>
                         <img
@@ -96,7 +114,7 @@ class Reports extends Component {
                     {localStorage.getItem("isAdmin") &&
                     <Button onClick={this.toggleDeleteItem} data-itemid={report._id} size="sm" variant="outline-dark" style={{width: "100%", height:"20px"}}><span style={{position:"relative", top:"-4px"}}>Delete</span></Button>}
                     <Card.Header>
-                        <Carousel interval={null}>
+                        <Carousel controls={false} interval={null}>
                             {links}
                         </Carousel>
                         <Image style={{position: "absolute", top:"-41px"}} src="https://i.imgur.com/jawkXJV.png?3" fluid/>
