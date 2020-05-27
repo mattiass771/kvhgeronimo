@@ -31,22 +31,40 @@ const MainLatest = () => {
 
     const getCarousel = (rep) => {
         let output = []
+        const getVideoLink = (l) => {
+            let linkTag = l.split("watch?v=")
+            let finalLink = `https://www.youtube.com/embed/${linkTag[1]}`
+            return finalLink
+        }
         rep.links.map((link, i) => {
-            output.push(
-                <Carousel.Item key={i}>
-                    <img
-                        style={{
-                            maxHeight: "350px",
-                            width: "auto",
-                            objectFit: "cover",
-                            objectPosition: "center",
-                            borderRadius: "5px",
-                            border: "4px solid whitesmoke"}}
-                        className="d-block w-100"
-                        alt={link}
-                        src={link}
-                    />
-                </Carousel.Item>
+            link.includes("youtube") ?
+                output.push(
+                    <Carousel.Item key={link}>
+                        <iframe 
+                            width="100%" 
+                            height="300px" 
+                            src={getVideoLink(link)}
+                            frameBorder="0"
+                            title={link}
+                            >
+                        </iframe>
+                    </Carousel.Item>
+                ) :
+                output.push(
+                    <Carousel.Item key={i}>
+                        <img
+                            style={{
+                                maxHeight: "350px",
+                                width: "auto",
+                                objectFit: "cover",
+                                objectPosition: "center",
+                                borderRadius: "5px",
+                                border: "4px solid whitesmoke"}}
+                            className="d-block w-100"
+                            alt={link}
+                            src={link}
+                        />
+                    </Carousel.Item>
             )
         })
         return output
@@ -85,6 +103,7 @@ const MainLatest = () => {
                         </Card.Header>
                         <Card.Body style={{textAlign:"center"}}>
                             <h3>{calendar.name}</h3>
+                            <h4>{calendar.date}</h4>
                             <p>{calendar.text}</p>
                         </Card.Body>
                     </Card>
