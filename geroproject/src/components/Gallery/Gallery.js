@@ -25,7 +25,7 @@ class Gallery extends Component {
     toggleRefresh = () => {
         axios.get(`https://kvhgeronimo.herokuapp.com/gallery/`)
         .then(response => {
-            this.setState({ galleries: response.data })
+            this.setState({ galleries: response.data.reverse() })
         })
         .catch(error => {
             console.log(error);

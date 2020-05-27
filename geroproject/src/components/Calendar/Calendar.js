@@ -38,7 +38,7 @@ class Calendar extends Component {
     toggleRefresh = () => {
         axios.get(`https://kvhgeronimo.herokuapp.com/calendar/`)
             .then(response => {
-                this.setState({ calendar: response.data })
+                this.setState({ calendar: response.data.reverse() })
             })
             .catch(error => {
                 console.log(error);

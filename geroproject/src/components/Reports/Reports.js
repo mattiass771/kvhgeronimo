@@ -31,7 +31,7 @@ class Reports extends Component {
     toggleRefresh = () => {
         axios.get(`https://kvhgeronimo.herokuapp.com/reports/`)
         .then(response => {
-            this.setState({ reports: response.data })
+            this.setState({ reports: response.data.reverse() })
         })
         .catch(error => {
             console.log(error);
