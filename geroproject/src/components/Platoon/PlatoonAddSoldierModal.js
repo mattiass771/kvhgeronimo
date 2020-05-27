@@ -119,19 +119,11 @@ class CalendarAddModal extends Component {
                             />
                             <input
                                 style={{ borderRadius: "10px", width:"50%", textAlign: "center", marginBottom: "15px", display:"inline-block" }}
-                                onChange={this.handleChange}
+                                readOnly
                                 type="text"
                                 name="password"
                                 value={this.state._id}
                                 placeholder="Password (currently the same as ASN)"
-                            />
-                            <input
-                                style={{ borderRadius: "10px", width:"50%", textAlign: "center", marginBottom: "15px", display:"inline-block" }}
-                                onChange={this.handleChange}
-                                type="text"
-                                name="rank"
-                                value={this.state.rank}
-                                placeholder="Army Rank"
                             />
                             <input
                                 style={{ borderRadius: "10px", width:"50%", textAlign: "center", marginBottom: "15px", display:"inline-block" }}
@@ -185,34 +177,80 @@ class CalendarAddModal extends Component {
                                 style={{ borderRadius: "10px", width:"50%", textAlign: "center", marginBottom: "15px", display:"inline-block" }}
                                 onChange={this.handleChange}
                                 type="text"
-                                name="action"
-                                value={this.state.action}
-                                placeholder="Deployed in Missions"
-                            />
-                            <input
-                                style={{ borderRadius: "10px", width:"50%", textAlign: "center", marginBottom: "15px", display:"inline-block" }}
-                                onChange={this.handleChange}
-                                type="text"
-                                name="squad"
-                                value={this.state.squad}
-                                placeholder="Squad"
-                            />
-                            <input
-                                style={{ borderRadius: "10px", width:"50%", textAlign: "center", marginBottom: "15px", display:"inline-block" }}
-                                onChange={this.handleChange}
-                                type="text"
-                                name="func"
-                                value={this.state.func}
-                                placeholder="Function"
-                            />
-                            <input
-                                style={{ borderRadius: "10px", width:"50%", textAlign: "center", marginBottom: "15px", display:"inline-block" }}
-                                onChange={this.handleChange}
-                                type="text"
                                 name="imageURL"
                                 value={this.state.imageURL}
                                 placeholder="URL to Image (leave empty if none)"
                             />
+                            <p style={{borderRadius: "10px", textAlign:"center", width:"50%", display:"inline-block"}}>
+                                Rank:
+                                <br />
+                                <select 
+                                    value={this.state.rank}
+                                    onChange={this.handleChange}
+                                    name="rank"
+                                    style={{width: "95%"}}
+                                >
+                                    <option value=""></option>
+                                    <option value="Pvt.">Private</option>
+                                    <option value="Pfc.">Private 1st Class</option>
+                                    <option value="Cpl.">Corporal</option>
+                                    <option value="Sgt.">Sergeant</option>
+                                    <option value="T/5">Technician 5th Grade</option>
+                                    <option value="Lt.">Lieutenant</option>
+                                    <option value="Cpt.">Captain</option>
+                                </select>
+                            </p>
+                            <p style={{borderRadius: "10px", textAlign:"center", width:"50%", display:"inline-block"}}>
+                                Function:
+                                <br />
+                                <select 
+                                    value={this.state.func}
+                                    onChange={this.handleChange}
+                                    name="func"
+                                    style={{width: "95%"}}
+                                >
+                                    <option value=""></option>
+                                    <option value="Rifle Man">Rifle Man</option>
+                                    <option value="2nd Assistant SQ Leader">2nd Assistant SQ Leader</option>
+                                    <option value="2nd in Charge">2nd in Charge</option>
+                                    <option value="Squad Leader">Squad Leader</option>
+                                    <option value="Technician Fifth Grade">Technician Fifth Grade</option>
+                                    <option value="1st Lieutenant">1st Lieutenant</option>
+                                    <option value="Platoon Leader Assistant">Platoon Leader Assistant</option>
+                                    <option value="Platoon Leader">Platoon Leader</option>
+                                </select>
+                            </p>
+                            <p style={{borderRadius: "10px", textAlign:"center", width:"50%", display:"inline-block"}}>
+                                Squad:
+                                <br />
+                                <select 
+                                    value={this.state.squad}
+                                    onChange={this.handleChange}
+                                    name="squad"
+                                    style={{width: "95%"}}
+                                >
+                                    <option value=""></option>
+                                    <option value="HQ">Headquarters</option>
+                                    <option value="WAC">Women's Army Corps</option>
+                                    <option value="1st Squad">First Squad</option>
+                                    <option value="2nd Squad">Second Squad</option>
+                                </select>
+                            </p>
+                            <p style={{borderRadius: "10px", textAlign:"center", width:"50%", display:"inline-block"}}>
+                                Missions:
+                                <br />
+                                <select 
+                                    value={this.state.action}
+                                    onChange={this.handleChange}
+                                    name="action"
+                                    style={{width: "95%"}}
+                                >
+                                    <option value=""></option>
+                                    <option value="Bootcamp I.">Bootcamp I.</option>
+                                    <option value="Bootcamp II.">Bootcamp II.</option>
+                                    <option value="Bootcamp III.">Bootcamp III.</option>
+                                </select>
+                            </p>
                             <textarea
                                 style={{ borderRadius: "10px", width: "100%", height: "300px" }} 
                                 onChange={this.handleChange}

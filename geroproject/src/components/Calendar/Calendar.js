@@ -143,7 +143,7 @@ class Calendar extends Component {
                         <h4>{calendar.name}</h4>
                         <h5>When: {calendar.date}</h5>
                         <h5 className="para" data-link={calendar.mapLink} onClick={this.togglePop}>Where: {calendar.place}</h5>
-                        <h5>Unit: {calendar.army}</h5>
+                        <h5>Unit: {isNaN(calendar.army) ? calendar.army.toUpperCase() : calendar.army[calendar.army.length-1] === '1' ? `${calendar.army}st` : calendar.army[calendar.army.length-1] === '2' ? `${calendar.army}nd` : calendar.army[calendar.army.length-1] === '3' ? `${calendar.army}rd` : `${calendar.army}nd`}</h5>
                         <p>{calendar.text}</p>
                         {localStorage.getItem("isAdmin") &&
                         <span>

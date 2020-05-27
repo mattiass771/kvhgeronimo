@@ -100,14 +100,22 @@ class CalendarAddModal extends Component {
                                 placeholder="Address (read below!)"
                             />
                             <p style={{textAlign:"center", fontSize:"90%", fontStyle:"italic"}}>(Address must be in following format: trnavske+myto+1,bratislava )</p>
-                            <input
-                                style={{ borderRadius: "10px", width:"100%", textAlign: "center", marginBottom: "15px" }}
-                                onChange={this.handleChange}
-                                type="text"
-                                name="army"
-                                value={this.state.army}
-                                placeholder="What Uniform should we wear?"
-                            />
+                            <p style={{textAlign:"center"}}>
+                                What uniform should we wear?
+                                <br />
+                                <select 
+                                    value={this.state.army}
+                                    onChange={this.handleChange}
+                                    name="army"
+                                >
+                                    <option value="509">509th</option>
+                                    <option value="101">101st</option>
+                                    <option value="armored">Armored</option>
+                                    <option value="aclass">A-Class</option>
+                                    <option value="bclass">B-Class</option>
+                                    <option value="cclass">C-Class</option>
+                                </select>
+                            </p>
                             <textarea
                                 style={{ borderRadius: "10px", width: "100%", height: "300px" }} 
                                 onChange={this.handleChange}
