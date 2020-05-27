@@ -31,18 +31,4 @@ router.route('/:id').delete((req, res) => {
         .catch(err => res.status(400).json(`Error: ${err}`));
 });
 
-router.route('/update/:id').post((req, res) => {
-    AboutUs.findById(req.params.id)
-        .then(aboutUs => {
-            aboutUs._id = req.body._id;
-            aboutUs.links = req.body.links;
-            aboutUs.text = req.body.text;
-
-            aboutUs.save()
-                .then(() => res.json('About Us Info updated!'))
-                .catch(err => res.status(400).json(`Error: ${err}`));
-        })
-        .catch(err => res.status(400).json(`Error: ${err}`));
-});
-
 module.exports = router;

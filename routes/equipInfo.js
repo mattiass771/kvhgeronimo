@@ -31,18 +31,4 @@ router.route('/:id').delete((req, res) => {
         .catch(err => res.status(400).json(`Error: ${err}`));
 });
 
-router.route('/update/:id').post((req, res) => {
-    EquipInfo.findById(req.params.id)
-        .then(equipInfo => {
-            equipInfo._id = req.body._id;
-            equipInfo.links = req.body.links;
-            equipInfo.image = req.body.image;
-
-            equipInfo.save()
-                .then(() => res.json('Equipment Info updated!'))
-                .catch(err => res.status(400).json(`Error: ${err}`));
-        })
-        .catch(err => res.status(400).json(`Error: ${err}`));
-});
-
 module.exports = router;
