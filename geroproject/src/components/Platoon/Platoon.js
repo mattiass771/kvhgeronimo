@@ -74,7 +74,7 @@ class Platoon extends Component {
                 let tempData = this.state.soldierData[sold]
                 if (tempData.squad === el) {
                     onShow.push(
-                        <span key={tempData._id}>
+                        <span key={tempData._id} ref={tempData.func}>
                             <Row>
                                 {localStorage.getItem("isAdmin") &&
                                 <Button onClick={this.toggleDeleteItem} data-itemid={tempData._id} size="sm" variant="outline-dark" style={{marginLeft:"20px" ,width: "80%", height:"15px"}}><span style={{position:"relative", top:"-7px"}}>Delete</span></Button>}
@@ -95,13 +95,25 @@ class Platoon extends Component {
             }
             for (let obj of onShow) {
                 let i = onShow.indexOf(obj)
-                if (obj.ref && obj.ref.includes("Squad Leader")) {
-                    onShow.splice(i,1)
-                    onShow.splice(1,0,obj)
+                if (obj.ref && (obj.ref === "Squad Leader")) {
+                    let temp = onShow.splice(i,1)
+                    onShow.splice(1,0,temp)
                 }
-                if (obj.ref && (obj.ref.includes("2nd") || obj.ref.includes("Assi"))) {
-                    onShow.splice(i,1)
-                    onShow.splice(2,0,obj)
+                if (obj.ref && (obj.ref === "2nd in Charge")) {
+                    let temp = onShow.splice(i,1)
+                    onShow.splice(2,0,temp)
+                }
+                if (obj.ref && (obj.ref === "Assistant SQ Leader")) {
+                    let temp = onShow.splice(i,1)
+                    onShow.splice(3,0,temp)
+                }
+                if (obj.ref && (obj.ref === "2nd Assistant SQ Leader")) {
+                    let temp = onShow.splice(i,1)
+                    onShow.splice(4,0,temp)
+                }
+                if (obj.ref && (obj.ref === "Rifle Man")) {
+                    let temp = onShow.splice(i,1)
+                    onShow.push(temp)
                 }
             }
             final.push(
@@ -114,6 +126,7 @@ class Platoon extends Component {
             )
             onShow = []
         }
+        console.log(final)
         return final
     }
 
