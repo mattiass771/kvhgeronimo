@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import equipObject from '../equipobject.json';
-import equipObjectWAC from '../equipobjectWAC.json';
+import equipObject from '../../equipobject.json';
+import equipObjectWAC from '../../equipobjectWAC.json';
 
 import { Modal, Button, Container } from 'react-bootstrap';
 

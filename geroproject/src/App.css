@@ -198,6 +198,16 @@ body {
   background: #555;
 }
 
+/* Footer */
+.footer-link {
+  color: #555;
+}
+
+.footer-link:hover {
+  color: #888;
+  text-decoration: none;
+}
+
 /* Screen Optim. */
 
 @media screen and (max-width: 768px) {

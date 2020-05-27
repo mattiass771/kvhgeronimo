@@ -74,9 +74,9 @@ function EditItems(props) {
                                     {elem[1]}
                                 </p>
                                 {elem[3] ? 
-                                <FaRegCheckCircle className="btn-smaller" onClick={() => updateItem(elem[2])} />
+                                <FaRegCheckCircle className="btn-smaller" onClick={() => {updateItem(elem[2])}} />
                                 :
-                                <FaRegCircle className="btn-smaller" onClick={() => updateItem(elem[2])} />
+                                <FaRegCircle className="btn-smaller" onClick={() => {updateItem(elem[2])}} />
                                 }
                             <br />
                             </span>

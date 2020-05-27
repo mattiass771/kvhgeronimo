@@ -1,11 +1,3 @@
-//unversal deleter popup
-
-//Are you sure you want to delete this?
-
-//1. pass href through props
-
-//2. delete item method
-
 import React, { Component } from 'react';
 import axios from 'axios';
 

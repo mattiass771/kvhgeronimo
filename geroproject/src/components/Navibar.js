@@ -17,17 +17,20 @@ function Navibar() {
                         <Nav.Link href="/platoon">Platoon</Nav.Link>
                         <Nav.Link href="/gallerycli">Gallery</Nav.Link>
                         <Nav.Link href="/reportscli">Reports</Nav.Link>
-                        <Nav.Link href="/calendarcli">Calendar</Nav.Link> 
-                        {/* <Nav.Link href="/">Contact</Nav.Link>
-                        <Nav.Link href="/">Buy War-Bonds</Nav.Link> */}
+                        {localStorage.getItem("logged") && 
+                        <Nav.Link href="/calendarcli">Calendar</Nav.Link>}
                     </Nav>
                 </Navbar.Collapse>
                 <Navbar.Collapse className="justify-content-end">
+                    {localStorage.getItem("logged") ?
                     <Nav>
                         <Nav.Link href="/soldiers">Compare Equipment</Nav.Link>
                         <Nav.Link href="/user">{localStorage.getItem("nameFull")}</Nav.Link>
                         <Button href="/" onClick={clearLocal} variant="outline-dark">Sign Out</Button>
-                    </Nav>
+                    </Nav> :
+                    <Nav>
+                        <Button href="/login" onClick={clearLocal} variant="outline-dark">Sign In</Button>
+                    </Nav>}
                 </Navbar.Collapse>
             </Navbar>
         </Container>

@@ -5,7 +5,7 @@ import { withRouter } from "react-router-dom";
 import { Carousel, Image, Container, Card, Row, Button } from 'react-bootstrap';
 
 import GalleryAddModal from './GalleryAddModal';
-import DeleteFromDb from './DeleteFromDB';
+import DeleteFromDb from '../DeleteFromDB';
 
 class Gallery extends Component {
     constructor() {
@@ -19,20 +19,13 @@ class Gallery extends Component {
     }
 
     componentDidMount() {
-        axios.get(`https://kvhgeronimo.herokuapp.com/gallery/`)
-        .then(response => {
-            this.setState({ galleries: response.data })
-        })
-        .catch(error => {
-            console.log(error);
-        });
+        this.toggleRefresh()
     }
 
     toggleRefresh = () => {
         axios.get(`https://kvhgeronimo.herokuapp.com/gallery/`)
         .then(response => {
             this.setState({ galleries: response.data })
-            console.log("refreshed")
         })
         .catch(error => {
             console.log(error);

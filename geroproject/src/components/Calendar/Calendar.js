@@ -7,7 +7,7 @@ import CalendarLocationModal from './CalendarLocationModal';
 import CalendarRecruitSoldier from './CalendarRecruitSoldier';
 import CalendarRecruitSoldiersAdmin from './CalendarRecruitSoldiersAdmin';
 import CalendarRemoveSoldiersAdmin from './CalendarRemoveSoldiersAdmin';
-import DeleteFromDb from './DeleteFromDB';
+import DeleteFromDb from '../DeleteFromDB';
 
 import { Card, Col,  Row, Button, Image, Container } from 'react-bootstrap';
 
@@ -34,8 +34,8 @@ class Calendar extends Component {
             passDeleteID: ""
         }
     }
-    
-    componentDidMount() {
+
+    toggleRefresh = () => {
         axios.get(`https://kvhgeronimo.herokuapp.com/calendar/`)
             .then(response => {
                 this.setState({ calendar: response.data })
@@ -43,7 +43,10 @@ class Calendar extends Component {
             .catch(error => {
                 console.log(error);
             });
-
+    }
+    
+    componentDidMount() {
+        this.toggleRefresh()
         axios.get(`https://kvhgeronimo.herokuapp.com/soldier/`)
             .then(response => {
                 this.setState({ soldierData: response.data })
@@ -82,17 +85,6 @@ class Calendar extends Component {
         this.setState({ deleteItem: !this.state.deleteItem, passDeleteID: "" })
     }
     //
-
-    toggleRefresh = () => {
-        axios.get(`https://kvhgeronimo.herokuapp.com/calendar/`)
-            .then(response => {
-                this.setState({ calendar: response.data })
-                console.log("refreshed")
-            })
-            .catch(error => {
-                console.log(error);
-            });
-    }
 
     handleClass = (event) => {
         let j = event.target.dataset.key
@@ -141,7 +133,7 @@ class Calendar extends Component {
                         <Image style={{position: "absolute", top:"-41px"}} src="https://i.imgur.com/jawkXJV.png?3" fluid/>
                         <Image style={{
                                 height: "325px",
-                                width: "auto",
+                                width: "100%",
                                 objectFit: "cover",
                                 objectPosition: "center",
                                 borderRadius: "5px",

@@ -34,7 +34,6 @@ class MainAboutUs extends Component {
                     <p>{this.state.text.para1}</p>
                     <p>{this.state.text.para2}</p>
                 </Col>
-                
             </Row>
         )
     }

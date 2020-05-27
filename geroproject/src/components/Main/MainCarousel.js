@@ -26,7 +26,6 @@ class MainCarousel extends Component {
 
     handleClick = (e) => {
         localStorage.setItem("galleryID", e.target.dataset.galleryid)
-        console.log(e.target.dataset.galleryid)
         this.props.history.push("opengallery");
     }
 

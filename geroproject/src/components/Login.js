@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 
-import { Image, Container, Form, Button } from 'react-bootstrap';
+import { Container, Form, Button } from 'react-bootstrap';
 
 class Login extends Component {
     constructor() {
@@ -30,6 +30,7 @@ class Login extends Component {
                     localStorage.setItem("nameFull", response.data.nameFull)
                     response.data.isAdmin && localStorage.setItem("isAdmin", true)
                     this.props.loggingOn()
+                    this.props.history.goBack()
                 }
                 else console.log("Wrong username or password", response.data.name, response.data.password)
             })
@@ -40,14 +41,7 @@ class Login extends Component {
 
     render() {
         return (
-            <Container 
-                style={{
-                    position: 'absolute', maxWidth: '350px', left: '50%', top: '50%', transform: 'translate(-50%, -50%)'
-                }}
-            >   
-                <Image style={{
-                    position: 'relative', maxWidth: '350px', left: '50%', transform: 'translate(-50%, -10%)'
-                }} src="https://www.509thgeronimo.org/images/509pibblack.jpg" fluid />
+            <Container style={{position: 'relative', maxWidth: '350px', marginTop: "5%", marginBottom: "5%"}}>   
                 <Form className="text-center">
                     <Form.Group>
                         <Form.Label>Username</Form.Label>
@@ -73,7 +67,7 @@ class Login extends Component {
                     </Form.Group>
                     <Button variant="dark" onClick={this.handleSubmit}>Log In</Button>
                 </Form>
-            </Container>
+            </Container>  
         )
     }
 }

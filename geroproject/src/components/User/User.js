@@ -42,10 +42,6 @@ class UpdateItems extends Component {
         axios.get(`https://kvhgeronimo.herokuapp.com/soldier/${localStorage.getItem("id")}`)
         .then(res => {
             this.setState({ soldier: res.data.equip })
-            axios.get(`https://kvhgeronimo.herokuapp.com/soldier/${localStorage.getItem("id")}`)
-                .then(response => {
-                    this.setState({ soldier: response.data.equip })
-                })
         })
     }
 

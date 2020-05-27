@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import GetSoldier from './GetSoldier';
-
-import MyModal from './MyModal';
+import MyModal from '../User/MyModal';
 
 import { Container, Col, Row } from 'react-bootstrap';
 
@@ -31,13 +30,7 @@ class Soldiers extends Component {
             .catch(error => {
                 console.log(error);
             });
-        axios.get('https://kvhgeronimo.herokuapp.com/soldier')
-            .then(response => {
-                this.setState({ soldiers: response.data })
-            })
-            .catch(error => {
-                console.log(error);
-            });
+        this.getUpdate()
     }
 
     getUpdate = () => {

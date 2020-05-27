@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import axios from 'axios';
 
 import ReportsAddModal from './ReportsAddModal';
-import DeleteFromDb from './DeleteFromDB';
+import DeleteFromDb from '../DeleteFromDB';
 
 import { Card, Col, Image, Carousel, Row, Button, Container } from 'react-bootstrap';
 
@@ -25,20 +25,13 @@ class Reports extends Component {
     }
     
     componentDidMount() {
-        axios.get(`https://kvhgeronimo.herokuapp.com/reports/`)
-        .then(response => {
-            this.setState({ reports: response.data })
-        })
-        .catch(error => {
-            console.log(error);
-        });
+        this.toggleRefresh()
     }
 
     toggleRefresh = () => {
         axios.get(`https://kvhgeronimo.herokuapp.com/reports/`)
         .then(response => {
             this.setState({ reports: response.data })
-            console.log("refreshed")
         })
         .catch(error => {
             console.log(error);

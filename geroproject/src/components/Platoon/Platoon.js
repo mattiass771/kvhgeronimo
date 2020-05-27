@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import axios from 'axios';
 
 import ProfileModal from './ProfileModal';
-import DeleteFromDb from './DeleteFromDB';
+import DeleteFromDb from '../DeleteFromDB';
 import PlatoonAddSoldierModal from './PlatoonAddSoldierModal';
 import { Image, Container, Row, Col, Button } from 'react-bootstrap';
 
@@ -23,7 +23,6 @@ class Platoon extends Component {
         axios.get(`https://kvhgeronimo.herokuapp.com/soldier/`)
             .then(response => {
                 this.setState({ soldierData: response.data })
-                console.log("refreshed")
             })
             .catch(error => {
                 console.log(error);
@@ -31,13 +30,7 @@ class Platoon extends Component {
     }
 
     componentDidMount() {
-        axios.get(`https://kvhgeronimo.herokuapp.com/soldier/`)
-        .then(response => {
-            this.setState({ soldierData: response.data })
-        })
-        .catch(error => {
-            console.log(error);
-        });
+        this.toggleRefresh()
     }
 
     handleClick = (e) => {

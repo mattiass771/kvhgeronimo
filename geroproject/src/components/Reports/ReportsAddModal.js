@@ -53,8 +53,8 @@ class ReportsAddModal extends Component {
         for (let link of this.state.links) {
             i++
             output.push(
-                <span>
-                    <p key={this.state.links.indexOf(link)}>
+                <span key={this.state.links.indexOf(link)}>
+                    <p>
                         <Button variant="outline-dark" data-deletelink={link} size="sm" onClick={this.deleteLink}>X</Button>&nbsp;&nbsp;
                         <strong>{i}.&nbsp;</strong>
                         {link}&nbsp;
