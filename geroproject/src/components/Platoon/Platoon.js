@@ -3,6 +3,7 @@ import axios from 'axios';
 
 import ProfileModal from './ProfileModal';
 import DeleteFromDb from '../DeleteFromDB';
+import PlatoonEditSoldierModal from './PlatoonEditSoldierModal';
 import PlatoonAddSoldierModal from './PlatoonAddSoldierModal';
 import { Image, Container, Row, Col, Button } from 'react-bootstrap';
 
@@ -15,7 +16,8 @@ class Platoon extends Component {
             soldierData: {},
             addSoldier: false,
             deleteItem: false,
-            passDeleteID: ""
+            editItem: false,
+            passID: ""
         }
     }
 
@@ -52,11 +54,19 @@ class Platoon extends Component {
     }
     
     toggleDeleteItem = (e) => {
-        this.setState({ deleteItem: !this.state.deleteItem, passDeleteID: e.currentTarget.dataset.itemid })
+        this.setState({ deleteItem: !this.state.deleteItem, passID: e.currentTarget.dataset.itemid })
     }
 
     closeDeleteItem = () => {
-        this.setState({ deleteItem: !this.state.deleteItem, passDeleteID: "" })
+        this.setState({ deleteItem: !this.state.deleteItem, passID: "" })
+    }
+    
+    toggleEditItem = (e) => {
+        this.setState({ editItem: !this.state.editItem, passID: e.currentTarget.dataset.itemid })
+    }
+
+    closeEditItem = () => {
+        this.setState({ editItem: !this.state.editItem, passID: "" })
     }
     //
 
@@ -78,6 +88,8 @@ class Platoon extends Component {
                             <Row>
                                 {localStorage.getItem("isAdmin") &&
                                 <Button onClick={this.toggleDeleteItem} data-itemid={tempData._id} size="sm" variant="outline-dark" style={{marginLeft:"20px" ,width: "80%", height:"15px"}}><span style={{position:"relative", top:"-7px"}}>Delete</span></Button>}
+                                {localStorage.getItem("isAdmin") &&
+                                <Button onClick={this.toggleEditItem} data-itemid={tempData._id} size="sm" variant="outline-dark" style={{marginLeft:"20px" ,width: "80%", height:"15px"}}><span style={{position:"relative", top:"-7px"}}>Edit</span></Button>}
                                 <Col xs={4}>
                                     <Image style={{marginLeft:"5px"}} src={tempData.imageURL ? tempData.imageURL : 
 "https://i.ibb.co/RYtTKY1/emptypicture.jpg"} thumbnail fluid/>
@@ -126,7 +138,6 @@ class Platoon extends Component {
             )
             onShow = []
         }
-        console.log(final)
         return final
     }
 
@@ -137,10 +148,11 @@ class Platoon extends Component {
                 <Row className="justify-content-center">
                     <Button variant="outline-dark" style={{marginBottom: "15px"}} onClick={this.toggleAddSoldier}>Add Soldier</Button>
                 </Row>}
-                {this.state.deleteItem && <DeleteFromDb toggleRefresh={this.toggleRefresh} collectionID="soldier" itemID={this.state.passDeleteID} toggleDeleteItem={this.closeDeleteItem} />}
-                {this.state.addSoldier ? <PlatoonAddSoldierModal toggleRefresh={this.toggleRefresh} toggleAddSoldier={this.toggleAddSoldier} /> : false}
+                {this.state.deleteItem && <DeleteFromDb toggleRefresh={this.toggleRefresh} collectionID="soldier" itemID={this.state.passID} toggleDeleteItem={this.closeDeleteItem} />}
+                {this.state.editItem && <PlatoonEditSoldierModal itemID={this.state.passID} toggleRefresh={this.toggleRefresh} togglePop={this.closeEditItem} />}
+                {this.state.addSoldier && <PlatoonAddSoldierModal toggleRefresh={this.toggleRefresh} toggleAddSoldier={this.toggleAddSoldier} />}
                 {this.getSoldiers()}
-                {this.state.popup ? <ProfileModal popup={this.state.popup} fadePop={this.fadePop} soldierID={this.state.soldierID} /> : null}
+                {this.state.popup && <ProfileModal popup={this.state.popup} fadePop={this.fadePop} soldierID={this.state.soldierID} />}
             </Container>
         )
     }

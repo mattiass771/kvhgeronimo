@@ -1,11 +1,9 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import equipObject from '../../equipobject.json';
-import equipObjectWAC from '../../equipobjectWAC.json';
 
 import { Modal, Button, Container } from 'react-bootstrap';
 
-class PlatoonAddSoldierModal extends Component {
+class PlatoonEditSoldierModal extends Component {
     constructor() {
         super()
         this.state = {
@@ -31,7 +29,7 @@ class PlatoonAddSoldierModal extends Component {
     }
 
     handleClose = () => {
-        this.props.toggleAddSoldier()
+        this.props.togglePop()
         this.setState({ popup: false })
     }
 
@@ -40,9 +38,33 @@ class PlatoonAddSoldierModal extends Component {
         this.setState({ [name]: value })
     }
 
-    addReport = () => {
-        this.state.squad === "WAC" ? this.setState({ equip: equipObjectWAC }) : this.setState({ equip: equipObject })
-        axios.post(`https://kvhgeronimo.herokuapp.com/soldier/add`, { 
+    componentDidMount() {
+        axios.get(`https://kvhgeronimo.herokuapp.com/soldier/${this.props.itemID}`)
+            .then(res => {
+                this.setState({
+                    _id: res.data._id, 
+                    password: res.data._id, 
+                    nameFull: res.data.nameFull, 
+                    completeName: res.data.completeName,
+                    name: res.data.name,
+                    rank: res.data.rank,
+                    state: res.data.state,
+                    birth: res.data.birth,
+                    eyes: res.data.eyes,
+                    hair: res.data.hair,
+                    weight: res.data.weight,
+                    height: res.data.height,
+                    story: res.data.story,
+                    action: res.data.action,
+                    squad: res.data.squad,
+                    func: res.data.func,
+                    imageURL: res.data.imageURL
+                })
+            })
+    }
+
+    editReport = () => {
+        axios.post(`https://kvhgeronimo.herokuapp.com/soldier/update-soldier/${this.props.itemID}`, { 
                 _id: this.state._id, 
                 password: this.state._id, 
                 nameFull: this.state.nameFull, 
@@ -59,8 +81,7 @@ class PlatoonAddSoldierModal extends Component {
                 action: this.state.action,
                 squad: this.state.squad,
                 func: this.state.func,
-                imageURL: this.state.imageURL,
-                equip: this.state.equip
+                imageURL: this.state.imageURL
             })
             .then(res => {
                 console.log(res.data)
@@ -259,7 +280,7 @@ class PlatoonAddSoldierModal extends Component {
                                 placeholder="Start writing story..."
                             />
                         </form>
-                        <Button variant="dark" style={{ width: "100%" }} onClick={this.addReport}>Upload New Soldier</Button>
+                        <Button variant="dark" style={{ width: "100%" }} onClick={this.editReport}>Update Soldier</Button>
                     </Container>
                 </Modal.Body>
             </Modal>
@@ -267,4 +288,4 @@ class PlatoonAddSoldierModal extends Component {
     }
 }
 
-export default PlatoonAddSoldierModal;
+export default PlatoonEditSoldierModal;

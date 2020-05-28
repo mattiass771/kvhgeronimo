@@ -72,4 +72,32 @@ router.route('/update-story/:id').post((req, res) => {
         .catch(err => res.status(400).json(`Error: ${err}`));
 });
 
+router.route('/update-soldier/:id').post((req, res) => {
+    Soldier.findById(req.params.id)
+        .then(soldier => {
+            reports._id = req.body._id;
+            reports.nameFull = req.body.nameFull;
+            reports.completeName = req.body.completeName;
+            reports.name = req.body.name;
+            reports.password = req.body.password;
+            reports.rank = req.body.rank;
+            reports.state = req.body.state;
+            reports.birth = req.body.birth;
+            reports.eyes = req.body.eyes;
+            reports.hair = req.body.hair;
+            reports.weight = req.body.weight;
+            reports.height = req.body.height;
+            reports.story = req.body.story;
+            reports.action = req.body.action;
+            reports.squad = req.body.squad;
+            reports.func = req.body.func;
+            reports.imageURL = req.body.imageURL;
+
+            soldier.save()
+                .then(() => res.json('Soldier Data updated!'))
+                .catch(err => res.status(400).json(`Error: ${err}`));
+        })
+        .catch(err => res.status(400).json(`Error: ${err}`));
+});
+
 module.exports = router;
