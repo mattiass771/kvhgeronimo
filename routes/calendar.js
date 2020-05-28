@@ -49,4 +49,22 @@ router.route('/update-soldiers/:id').post((req, res) => {
         .catch(err => res.status(400).json(`Error: ${err}`));
 });
 
+router.route('/update-calendar/:id').post((req, res) => {
+    Calendar.findById(req.params.id)
+        .then(calendar => {
+            calendar.name = req.body.name;
+            calendar.date = req.body.date;
+            calendar.place = req.body.place;
+            calendar.mapLink = req.body.mapLink;
+            calendar.link = req.body.link;
+            calendar.text = req.body.text;
+            calendar.army = req.body.army;
+
+            calendar.save()
+                .then(() => res.json('Calendar updated!'))
+                .catch(err => res.status(400).json(`Error: ${err}`));
+        })
+        .catch(err => res.status(400).json(`Error: ${err}`));
+});
+
 module.exports = router;

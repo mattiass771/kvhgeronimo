@@ -32,6 +32,9 @@ class ReportsEditModal extends Component {
             .then(res => {
                 this.setState({ links: res.data.links, name: res.data.name, text: res.data.text })
             })
+            .catch(err => {
+                console.log(err)
+            });
     }
 
     addReport = () => {

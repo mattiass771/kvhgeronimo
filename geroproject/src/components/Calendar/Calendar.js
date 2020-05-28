@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import axios from 'axios';
 
 import CalendarAddModal from './CalendarAddModal';
+import CalendarEditModal from './CalendarEditModal';
 import CalendarCompareModal from './CalendarCompareModal';
 import CalendarLocationModal from './CalendarLocationModal';
 import CalendarRecruitSoldier from './CalendarRecruitSoldier';
@@ -31,7 +32,8 @@ class Calendar extends Component {
             passArmy: [],
             passMapLink: "",
             deleteItem: false,
-            passDeleteID: ""
+            passID: "",
+            editItem: false
         }
     }
 
@@ -78,11 +80,19 @@ class Calendar extends Component {
     }
     
     toggleDeleteItem = (e) => {
-        this.setState({ deleteItem: !this.state.deleteItem, passDeleteID: e.currentTarget.dataset.itemid })
+        this.setState({ deleteItem: !this.state.deleteItem, passID: e.currentTarget.dataset.itemid })
     }
 
     closeDeleteItem = () => {
-        this.setState({ deleteItem: !this.state.deleteItem, passDeleteID: "" })
+        this.setState({ deleteItem: !this.state.deleteItem, passID: "" })
+    }
+    
+    toggleEditItem = (e) => {
+        this.setState({ editItem: !this.state.editItem, passID: e.currentTarget.dataset.itemid })
+    }
+
+    closeEditItem = () => {
+        this.setState({ editItem: !this.state.editItem, passID: "" })
     }
     //
 
@@ -139,6 +149,8 @@ class Calendar extends Component {
                                 borderRadius: "5px",
                                 border: "0.5px solid whitesmoke"}} src={calendar.link} thumbnail fluid/>
                     </Card.Header>
+                    {localStorage.getItem("isAdmin") &&
+                    <Button onClick={this.toggleEditItem} data-itemid={calendar._id} size="sm" variant="outline-dark" style={{width: "100%", height:"20px"}}><span style={{position:"relative", top:"-4px"}}>Edit</span></Button>}
                     <Card.Body style={{textAlign:"center"}} className={this.state.isOpen[i] ? this.state.fullCardClass : this.state.infoCardClass}>
                         <h4>{calendar.name}</h4>
                         <h5>When: {calendar.date}</h5>
@@ -187,10 +199,11 @@ class Calendar extends Component {
                 <Row className="justify-content-center">
                     <Button variant="outline-dark" style={{marginBottom: "15px"}} onClick={this.toggleAddEvent}>Add Event</Button>
                 </Row>}
-                {this.state.deleteItem && <DeleteFromDb toggleRefresh={this.toggleRefresh} collectionID="calendar" itemID={this.state.passDeleteID} toggleDeleteItem={this.closeDeleteItem} />}
-                {this.state.addEvent ? <CalendarAddModal toggleRefresh={this.toggleRefresh} toggleAddEvent={this.toggleAddEvent} /> : false}
-                {this.state.popup ? <CalendarLocationModal mapLink={this.state.passMapLink} closePop={this.closePop} togglePop={this.togglePop} /> : false}
-                {this.state.items ? <CalendarCompareModal army={this.state.passArmy} soldierID={this.state.passSoldID} closeItems={this.closeItems} openItems={this.openItems} /> : false}
+                {this.state.deleteItem && <DeleteFromDb toggleRefresh={this.toggleRefresh} collectionID="calendar" itemID={this.state.passID} toggleDeleteItem={this.closeDeleteItem} />}
+                {this.state.editItem && <CalendarEditModal itemID={this.state.passID} toggleRefresh={this.toggleRefresh} togglePop={this.closeEditItem} />}
+                {this.state.addEvent && <CalendarAddModal toggleRefresh={this.toggleRefresh} toggleAddEvent={this.toggleAddEvent} />}
+                {this.state.popup && <CalendarLocationModal mapLink={this.state.passMapLink} closePop={this.closePop} togglePop={this.togglePop} />}
+                {this.state.items && <CalendarCompareModal army={this.state.passArmy} soldierID={this.state.passSoldID} closeItems={this.closeItems} openItems={this.openItems} />}
                 {this.getData()}
                 {this.getCalendar()}
             </>
