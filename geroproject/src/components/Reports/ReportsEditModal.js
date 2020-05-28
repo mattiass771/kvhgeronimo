@@ -3,7 +3,7 @@ import axios from 'axios';
 
 import { Modal, Button, Container } from 'react-bootstrap';
 
-class ReportsAddModal extends Component {
+class ReportsEditModal extends Component {
     constructor() {
         super()
         this.state = {
@@ -27,8 +27,15 @@ class ReportsAddModal extends Component {
         this.setState({ [name]: value })
     }
 
+    componentDidMount() {
+        axios.get(`https://kvhgeronimo.herokuapp.com/reports/${this.props.itemID}`)
+            .then(res => {
+                this.setState({ links: res.data.links, name: res.data.name, text: res.data.text })
+            })
+    }
+
     addReport = () => {
-        axios.post(`https://kvhgeronimo.herokuapp.com/reports/add`, { links: this.state.links, name: this.state.name, isOpen: this.state.isOpen, text: this.state.text })
+        axios.post(`https://kvhgeronimo.herokuapp.com/update-report/${this.props.itemID}`, { name: this.state.name, text: this.state.text, links: this.state.links })
             .then(res => {
                 console.log(res.data)
                 this.props.toggleRefresh()
@@ -107,7 +114,7 @@ class ReportsAddModal extends Component {
                             <Button variant="outline-dark" style={{ top:"10px" }} size="sm" onClick={this.addLink}>Add Link</Button>
                             {this.showLinks()}
                         </form>
-                        <Button variant="dark" style={{ width: "100%" }} onClick={this.addReport}>Upload Report</Button>
+                        <Button variant="dark" style={{ width: "100%" }} onClick={this.addReport}>Update Report</Button>
                     </Container>
                 </Modal.Body>
             </Modal>
@@ -115,4 +122,4 @@ class ReportsAddModal extends Component {
     }
 }
 
-export default ReportsAddModal;
+export default ReportsEditModal;

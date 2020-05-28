@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import axios from 'axios';
 
 import ReportsAddModal from './ReportsAddModal';
+import ReportsEditModal from './ReportsEditModal';
 import DeleteFromDb from '../DeleteFromDB';
 
 import { Card, Col, Image, Carousel, Row, Button, Container } from 'react-bootstrap';
@@ -20,7 +21,8 @@ class Reports extends Component {
             refresh: true,
             popup: false,
             deleteItem: false,
-            passDeleteID: ""
+            passID: "",
+            editItem: false
         }
     }
     
@@ -44,11 +46,19 @@ class Reports extends Component {
     }
     
     toggleDeleteItem = (e) => {
-        this.setState({ deleteItem: !this.state.deleteItem, passDeleteID: e.currentTarget.dataset.itemid })
+        this.setState({ deleteItem: !this.state.deleteItem, passID: e.currentTarget.dataset.itemid })
     }
 
     closeDeleteItem = () => {
-        this.setState({ deleteItem: !this.state.deleteItem, passDeleteID: "" })
+        this.setState({ deleteItem: !this.state.deleteItem, passID: "" })
+    }
+    
+    toggleEditItem = (e) => {
+        this.setState({ editItem: !this.state.editItem, passID: e.currentTarget.dataset.itemid })
+    }
+
+    closeEditItem = () => {
+        this.setState({ editItem: !this.state.editItem, passID: "" })
     }
     //
 
@@ -119,6 +129,8 @@ class Reports extends Component {
                         </Carousel>
                         <Image style={{position: "absolute", top:"-41px"}} src="https://i.imgur.com/jawkXJV.png?3" fluid/>
                     </Card.Header>
+                    {localStorage.getItem("isAdmin") &&
+                    <Button onClick={this.toggleEditItem} data-itemid={report._id} size="sm" variant="outline-dark" style={{width: "100%", height:"20px"}}><span style={{position:"relative", top:"-4px"}}>Edit</span></Button>}
                     <Card.Body style={{textAlign:"center"}} className={this.state.isOpen[i] ? this.state.fullCardClass : this.state.infoCardClass}>
                         <h3>{report.name}</h3>
                         <p>{report.text}</p>
@@ -154,8 +166,9 @@ class Reports extends Component {
                 <Row className="justify-content-center">
                     <Button variant="outline-dark" style={{marginBottom: "15px"}} onClick={this.togglePop}>Add Report</Button>
                 </Row>}
-                {this.state.deleteItem && <DeleteFromDb toggleRefresh={this.toggleRefresh} collectionID="reports" itemID={this.state.passDeleteID} toggleDeleteItem={this.closeDeleteItem} />}
-                {this.state.popup ? <ReportsAddModal toggleRefresh={this.toggleRefresh} togglePop={this.togglePop} /> : false}
+                {this.state.deleteItem && <DeleteFromDb toggleRefresh={this.toggleRefresh} collectionID="reports" itemID={this.state.passID} toggleDeleteItem={this.closeDeleteItem} />}
+                {this.state.editItem && <ReportsEditModal itemID={this.state.passID} toggleRefresh={this.toggleRefresh} togglePop={this.closeEditItem} />}
+                {this.state.popup && <ReportsAddModal toggleRefresh={this.toggleRefresh} togglePop={this.togglePop} />}
                 {this.getData()}
                 {this.getReports()}
             </>

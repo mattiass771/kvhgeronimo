@@ -32,4 +32,18 @@ router.route('/:id').delete((req, res) => {
         .catch(err => res.status(400).json(`Error: ${err}`));
 });
 
+router.route('/update-report/:id').post((req, res) => {
+    Reports.findById(req.params.id)
+        .then(reports => {
+            reports.name = req.body.name;
+            reports.text = req.body.text;
+            reports.links = req.body.links;
+
+            reports.save()
+                .then(() => res.json('Report updated!'))
+                .catch(err => res.status(400).json(`Error: ${err}`));
+        })
+        .catch(err => res.status(400).json(`Error: ${err}`));
+});
+
 module.exports = router;
