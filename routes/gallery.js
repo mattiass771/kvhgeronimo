@@ -33,4 +33,20 @@ router.route('/:id').delete((req, res) => {
         .catch(err => res.status(400).json(`Error: ${err}`));
 });
 
+router.route('/update-gallery/:id').post((req, res) => {
+    Gallery.findById(req.params.id)
+        .then(gallery => {
+            gallery.name = req.body.name;
+            gallery.date = req.body.date;
+            gallery.showLink = req.body.showLink;
+            gallery.about = req.body.about;
+            gallery.links = req.body.links;
+
+            gallery.save()
+                .then(() => res.json('Gallery updated!'))
+                .catch(err => res.status(400).json(`Error: ${err}`));
+        })
+        .catch(err => res.status(400).json(`Error: ${err}`));
+});
+
 module.exports = router;

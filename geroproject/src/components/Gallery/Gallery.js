@@ -5,6 +5,7 @@ import { withRouter } from "react-router-dom";
 import { Carousel, Image, Container, Card, Row, Button } from 'react-bootstrap';
 
 import GalleryAddModal from './GalleryAddModal';
+import GalleryEditModal from './GalleryEditModal';
 import DeleteFromDb from '../DeleteFromDB';
 
 class Gallery extends Component {
@@ -14,7 +15,8 @@ class Gallery extends Component {
             galleries: [],
             popup: false,
             deleteItem: false,
-            passDeleteID: ""
+            editItem: false,
+            passID: ""
         }
     }
 
@@ -37,11 +39,19 @@ class Gallery extends Component {
     }
 
     toggleDeleteItem = (e) => {
-        this.setState({ deleteItem: !this.state.deleteItem, passDeleteID: e.currentTarget.dataset.itemid })
+        this.setState({ deleteItem: !this.state.deleteItem, passID: e.currentTarget.dataset.itemid })
     }
 
     closeDeleteItem = () => {
-        this.setState({ deleteItem: !this.state.deleteItem, passDeleteID: "" })
+        this.setState({ deleteItem: !this.state.deleteItem, passID: "" })
+    }
+
+    toggleEditItem = (e) => {
+        this.setState({ editItem: !this.state.editItem, passID: e.currentTarget.dataset.itemid })
+    }
+
+    closeEditItem = () => {
+        this.setState({ editItem: !this.state.editItem, passID: "" })
     }
 
     handleClick = (gal) => {
@@ -101,6 +111,8 @@ class Gallery extends Component {
                             {carouselItem}
                         </Carousel>
                     </Card.Header>
+                    {localStorage.getItem("isAdmin") &&
+                    <Button onClick={this.toggleEditItem} data-itemid={gallery._id} size="sm" variant="outline-dark" style={{width: "100%", height:"20px"}}><span style={{position:"relative", top:"-4px"}}>Edit</span></Button>}
                     <Card.Body>
                         <p>{gallery.about}</p>
                     </Card.Body>
@@ -119,7 +131,8 @@ class Gallery extends Component {
                     <Row className="justify-content-center">
                         <Button variant="outline-dark" style={{marginBottom: "15px"}} onClick={this.togglePop}>Add Gallery</Button>
                     </Row>}
-                    {this.state.deleteItem && <DeleteFromDb toggleRefresh={this.toggleRefresh} collectionID="gallery" itemID={this.state.passDeleteID} toggleDeleteItem={this.closeDeleteItem} />}
+                    {this.state.deleteItem && <DeleteFromDb toggleRefresh={this.toggleRefresh} collectionID="gallery" itemID={this.state.passID} toggleDeleteItem={this.closeDeleteItem} />}
+                    {this.state.editItem && <GalleryEditModal itemID={this.state.passID} toggleRefresh={this.toggleRefresh} togglePop={this.closeEditItem} />}
                     {this.state.popup && <GalleryAddModal toggleRefresh={this.toggleRefresh} togglePop={this.togglePop} />}
                     {this.getGallery()}
                 </Container>
