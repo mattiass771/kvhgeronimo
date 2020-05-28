@@ -104,15 +104,15 @@ class Gallery extends Component {
             galleryShow.push(
                 <Card key={i} className="block-background" style={{marginBottom: "15px", borderRadius:"5px"}}>
                     {localStorage.getItem("isAdmin") &&
-                    <Button onClick={this.toggleDeleteItem} data-itemid={gallery._id} size="sm" variant="outline-dark" style={{width: "100%", height:"20px"}}><span style={{position:"relative", top:"-4px"}}>Delete</span></Button>}
+                    <Button onClick={this.toggleDeleteItem} data-itemid={gallery._id} size="sm" variant="outline-dark" style={{width: "100%", marginBottom: "1px", height:"20px"}}><span style={{position:"relative", top:"-4px"}}>Delete</span></Button>}
+                    {localStorage.getItem("isAdmin") &&
+                    <Button onClick={this.toggleEditItem} data-itemid={gallery._id} size="sm" variant="outline-dark" style={{width: "100%", height:"20px"}}><span style={{position:"relative", top:"-4px"}}>Edit</span></Button>}
                     <Card.Header>
                         <h5 style={{textAlign: "center"}}>{gallery.name}</h5>
                         <Carousel style={{border:"3px solid whitesmoke", borderRadius:"5px"}} onClick={() => this.handleClick(gallery)} className="pointer-on-hover" interval={5000} controls={false} indicators={false} pause={false} >
                             {carouselItem}
                         </Carousel>
                     </Card.Header>
-                    {localStorage.getItem("isAdmin") &&
-                    <Button onClick={this.toggleEditItem} data-itemid={gallery._id} size="sm" variant="outline-dark" style={{width: "100%", height:"20px"}}><span style={{position:"relative", top:"-4px"}}>Edit</span></Button>}
                     <Card.Body>
                         <p>{gallery.about}</p>
                     </Card.Body>

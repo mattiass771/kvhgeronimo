@@ -122,15 +122,15 @@ class Reports extends Component {
             output.push(
                 <Card className="block-background" key={i} style={{marginBottom:"15px", borderRadius:"5px"}}>
                     {localStorage.getItem("isAdmin") &&
-                    <Button onClick={this.toggleDeleteItem} data-itemid={report._id} size="sm" variant="outline-dark" style={{width: "100%", height:"20px"}}><span style={{position:"relative", top:"-4px"}}>Delete</span></Button>}
+                    <Button onClick={this.toggleDeleteItem} data-itemid={report._id} size="sm" variant="outline-dark" style={{width: "100%", marginBottom: "1px", height:"20px"}}><span style={{position:"relative", top:"-4px"}}>Delete</span></Button>}
+                    {localStorage.getItem("isAdmin") &&
+                    <Button onClick={this.toggleEditItem} data-itemid={report._id} size="sm" variant="outline-dark" style={{width: "100%", height:"20px"}}><span style={{position:"relative", top:"-4px"}}>Edit</span></Button>}
                     <Card.Header>
                         <Carousel controls={false} interval={null}>
                             {links}
                         </Carousel>
                         <Image style={{position: "absolute", top:"-41px"}} src="https://i.imgur.com/jawkXJV.png?3" fluid/>
                     </Card.Header>
-                    {localStorage.getItem("isAdmin") &&
-                    <Button onClick={this.toggleEditItem} data-itemid={report._id} size="sm" variant="outline-dark" style={{width: "100%", height:"20px"}}><span style={{position:"relative", top:"-4px"}}>Edit</span></Button>}
                     <Card.Body style={{textAlign:"center"}} className={this.state.isOpen[i] ? this.state.fullCardClass : this.state.infoCardClass}>
                         <h3>{report.name}</h3>
                         <p>{report.text}</p>

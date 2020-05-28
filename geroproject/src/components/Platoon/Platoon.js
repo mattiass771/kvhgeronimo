@@ -87,7 +87,7 @@ class Platoon extends Component {
                         <span key={tempData._id} ref={tempData.func}>
                             <Row>
                                 {localStorage.getItem("isAdmin") &&
-                                <Button onClick={this.toggleDeleteItem} data-itemid={tempData._id} size="sm" variant="outline-dark" style={{marginLeft:"20px" ,width: "80%", height:"15px"}}><span style={{position:"relative", top:"-7px"}}>Delete</span></Button>}
+                                <Button onClick={this.toggleDeleteItem} data-itemid={tempData._id} size="sm" variant="outline-dark" style={{marginLeft:"20px", marginBottom: "1px" ,width: "80%", height:"15px"}}><span style={{position:"relative", top:"-7px"}}>Delete</span></Button>}
                                 {localStorage.getItem("isAdmin") &&
                                 <Button onClick={this.toggleEditItem} data-itemid={tempData._id} size="sm" variant="outline-dark" style={{marginLeft:"20px" ,width: "80%", height:"15px"}}><span style={{position:"relative", top:"-7px"}}>Edit</span></Button>}
                                 <Col xs={4}>
