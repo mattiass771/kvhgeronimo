@@ -42,7 +42,7 @@ const MainLatest = () => {
                     <Carousel.Item key={link}>
                         <iframe 
                             width="100%" 
-                            height="300px" 
+                            height="294px" 
                             src={getVideoLink(link)}
                             frameBorder="0"
                             title={link}

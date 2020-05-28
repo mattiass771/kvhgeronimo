@@ -35,7 +35,7 @@ class ReportsEditModal extends Component {
     }
 
     addReport = () => {
-        axios.post(`https://kvhgeronimo.herokuapp.com/update-report/${this.props.itemID}`, { name: this.state.name, text: this.state.text, links: this.state.links })
+        axios.post(`https://kvhgeronimo.herokuapp.com/reports/update-report/${this.props.itemID}`, { name: this.state.name, text: this.state.text, links: this.state.links })
             .then(res => {
                 console.log(res.data)
                 this.props.toggleRefresh()
