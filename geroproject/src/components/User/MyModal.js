@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import axios from 'axios';
 
 import { Modal, Button, Image, Row, Col, Container } from 'react-bootstrap';
@@ -38,9 +38,18 @@ class MyModal extends Component {
         let arr = this.getItems(this.state.itemLinks)
         return (
             arr.map((val, i) => {
-                return (
-                    <Col key={i}><Button target='_blank' style={{fontSize: 20}} variant="light" href={val[1]}>{val[0]}</Button></Col>
-                )
+                console.log(val)
+                if (val[1].length) {
+                    return (
+                        <Row style={{height:"35px", marginBottom:"5px"}} key={i} >
+                                {val[0] === "bestLink" ? <Button target='_blank' variant="light" href={val[1]} style={{ marginLeft:"10%", marginRight:"10%", height:"100%", width: "80%", backgroundColor: "green"}}>Best Option</Button> : 
+                                val[0] === "fairLink" ? <Button target='_blank' variant="light" href={val[1]} style={{ marginLeft:"10%", marginRight:"10%", height:"100%", width: "80%", backgroundColor: "yellow"}}>Fair Option</Button> : 
+                                val[0] === "goodLink" ? <Button target='_blank' variant="light" href={val[1]} style={{ marginLeft:"10%", marginRight:"10%", height:"100%", width: "80%", backgroundColor: "lightgreen"}}>Good Option</Button> : 
+                                val[0] === "notRecLink" ? <Button target='_blank' variant="light" href={val[1]} style={{ marginLeft:"10%", marginRight:"10%", height:"100%", width: "80%", backgroundColor: "orange"}}>Not Recommended</Button> : 
+                                val[0] === "dontBuyLink" ? <Button target='_blank' variant="light" href={val[1]} style={{ marginLeft:"10%", marginRight:"10%", height:"100%", width: "80%", backgroundColor: "red"}}>Dont Buy</Button> : false}
+                        </Row>
+                    )
+                }
             })
         )
     }
@@ -57,29 +66,22 @@ class MyModal extends Component {
 
     render() {
         return (    
-            <Modal show={this.state.popup} onHide={this.handleClose}>
+            <Modal size="md" show={this.state.popup} onHide={this.handleClose}>
                 <Modal.Header>
                     <Modal.Title>{this.props.item[0]}</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
                     <Container>
                         <Row className="show-grid">
-                            <Col md={6}>
+                            <Col>
                                 {this.state.missingImageError ? 
                                 <Image src="https://cdn2.vectorstock.com/i/thumb-large/47/66/
 ww2-soldier-warriors-theme-vector-2674766.jpg" fluid/> : 
                                 <Image src={this.state.itemImage} fluid/>}
                             </Col>
-                            <Col md={6}>
-                                Toto je popisok k obrazku a tento popisok este 
-                                nieje napisany do databazy takze tu je zatial len tato jedna veta ako placeholder.
-                            </Col>
                         </Row>
                         <br />
-                        <h5>Recommended Models:</h5>
-                        <Row>
-                            <this.ShowSellers />
-                        </Row>
+                            {this.ShowSellers()}
                     </Container>
                 </Modal.Body>
                 <Modal.Footer>
