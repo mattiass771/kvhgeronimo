@@ -66,10 +66,10 @@ class PlatoonEditSoldierModal extends Component {
     editReport = () => {
         axios.post(`https://kvhgeronimo.herokuapp.com/soldier/update-soldier/${this.props.itemID}`, { 
                 _id: this.state._id, 
-                password: this.state._id, 
                 nameFull: this.state.nameFull, 
                 completeName: this.state.completeName,
                 name: this.state.name,
+                password: this.state._id, 
                 rank: this.state.rank,
                 state: this.state.state,
                 birth: this.state.birth,
