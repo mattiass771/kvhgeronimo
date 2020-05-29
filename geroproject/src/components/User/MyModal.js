@@ -42,8 +42,7 @@ class MyModal extends Component {
                 if (val[1].length) {
                     return (
                         <Row style={{height:"35px", marginBottom:"5px"}} key={i} >
-                                {(val[0] === "bestlink" && val[1] === "original") ? <Button variant="light" style={{ marginLeft:"10%", marginRight:"10%", height:"100%", width: "80%", backgroundColor: "green"}}>Original Piece</Button> :
-                                (val[0] === "bestLink" && val[1] !== "original") ? <Button target='_blank' variant="light" href={val[1]} style={{ marginLeft:"10%", marginRight:"10%", height:"100%", width: "80%", backgroundColor: "green"}}>Best Option</Button> : 
+                                {val[0] === "bestLink" ? <Button target='_blank' variant="light" href={val[1]} style={{ marginLeft:"10%", marginRight:"10%", height:"100%", width: "80%", backgroundColor: "green"}}>Best Option</Button> : 
                                 val[0] === "fairLink" ? <Button target='_blank' variant="light" href={val[1]} style={{ marginLeft:"10%", marginRight:"10%", height:"100%", width: "80%", backgroundColor: "yellow"}}>Fair Option</Button> : 
                                 val[0] === "goodLink" ? <Button target='_blank' variant="light" href={val[1]} style={{ marginLeft:"10%", marginRight:"10%", height:"100%", width: "80%", backgroundColor: "lightgreen"}}>Good Option</Button> : 
                                 val[0] === "notRecLink" ? <Button target='_blank' variant="light" href={val[1]} style={{ marginLeft:"10%", marginRight:"10%", height:"100%", width: "80%", backgroundColor: "orange"}}>Not Recommended</Button> : 
@@ -82,6 +81,7 @@ ww2-soldier-warriors-theme-vector-2674766.jpg" fluid/> :
                             </Col>
                         </Row>
                         <br />
+                        <h5>ORIGINAL PIECE IS ALWAYS THE BEST CHOICE!</h5>
                             {this.ShowSellers()}
                     </Container>
                 </Modal.Body>
