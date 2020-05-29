@@ -21,7 +21,10 @@ import './App.css';
    1. Edit MyModal for - recommended models (best, good, fair) and dont buy: (shit)
    2. Reduce axios calls and pass unnecessary per props
    3. EditItems.js - add state for icon handler (to reduce wait time for check / uncheck)
-   6. Create Manual for Admins on DB-Attributes and how to handle inputs
+   4. Moznost misia k reportu  -> ta poputuje do array v databaze -> ta sa bude mapovat na vojakov -> v profile a v modali sa ukazu misie na ktorych sa podielal
+   5. Library - Reporty ale interne (navody a tips n tricks)
+   6. Obsah prerobit do slovenciny
+   99. Create Manual for Admins on DB-Attributes and how to handle inputs
 */
 
 class App extends Component {
