@@ -41,7 +41,7 @@ class MyModal extends Component {
                 console.log(val)
                 if (val[1].length) {
                     return (
-                        <Row style={{height:"35px", marginBottom:"5px"}} key={i} >
+                        <Row style={{height:"35px", marginBottom:"5px", textAlign: "center"}} key={i} >
                                 {val[0] === "bestLink" ? <Button target='_blank' variant="light" href={val[1]} style={{ marginLeft:"10%", marginRight:"10%", height:"100%", width: "80%", backgroundColor: "green"}}>Best Option</Button> : 
                                 val[0] === "fairLink" ? <Button target='_blank' variant="light" href={val[1]} style={{ marginLeft:"10%", marginRight:"10%", height:"100%", width: "80%", backgroundColor: "yellow"}}>Fair Option</Button> : 
                                 val[0] === "goodLink" ? <Button target='_blank' variant="light" href={val[1]} style={{ marginLeft:"10%", marginRight:"10%", height:"100%", width: "80%", backgroundColor: "lightgreen"}}>Good Option</Button> : 
@@ -72,7 +72,7 @@ class MyModal extends Component {
                 </Modal.Header>
                 <Modal.Body>
                     <Container>
-                        <Row className="show-grid">
+                        <Row className="show-grid" style={{textAlign: "center"}}>
                             <Col>
                                 {this.state.missingImageError ? 
                                 <Image src="https://cdn2.vectorstock.com/i/thumb-large/47/66/
@@ -81,7 +81,7 @@ ww2-soldier-warriors-theme-vector-2674766.jpg" fluid/> :
                             </Col>
                         </Row>
                         <br />
-                        <h5>ORIGINAL PIECE IS ALWAYS THE BEST CHOICE!</h5>
+                        <h5 style={{textAlign: "center"}}>ORIGINAL PIECE IS ALWAYS THE BEST CHOICE!</h5>
                             {this.ShowSellers()}
                     </Container>
                 </Modal.Body>
