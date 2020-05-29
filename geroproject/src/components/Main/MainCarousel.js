@@ -50,7 +50,7 @@ class MainCarousel extends Component {
 
     render () {
         return (
-            <Carousel style={{marginTop: "-24px"}} interval={5000} indicators={false}>
+            <Carousel style={{marginTop: "-24px"}} interval={5000} indicators={false} controls={false}>
                 {this.getCarousel()}
             </Carousel>
         )

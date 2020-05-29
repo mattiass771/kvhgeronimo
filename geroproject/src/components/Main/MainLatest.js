@@ -77,7 +77,7 @@ const MainLatest = () => {
                     <h3 style={{textAlign: "center"}}>LATEST REPORT</h3>
                     <Card className="block-background" style={{marginBottom:"15px", borderRadius:"5px"}}>
                         <Card.Header>
-                            <Carousel interval={null}>
+                            <Carousel controls={false} interval={null}>
                                 {(loaded && report.links !== undefined) && getCarousel(report)}
                             </Carousel>
                             <Image style={{position: "absolute", top:"-41px"}} src="https://i.imgur.com/jawkXJV.png?3" fluid/>
