@@ -113,7 +113,7 @@ class Gallery extends Component {
                             {carouselItem}
                         </Carousel>
                     </Card.Header>
-                    <Card.Body>
+                    <Card.Body style={{whiteSpace: "pre-line"}}>
                         <p>{gallery.about}</p>
                     </Card.Body>
                 </Card>

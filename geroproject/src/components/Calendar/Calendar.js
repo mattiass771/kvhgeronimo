@@ -151,7 +151,7 @@ class Calendar extends Component {
                                 borderRadius: "5px",
                                 border: "0.5px solid whitesmoke"}} src={calendar.link} thumbnail fluid/>
                     </Card.Header>
-                    <Card.Body style={{textAlign:"center"}} className={this.state.isOpen[i] ? this.state.fullCardClass : this.state.infoCardClass}>
+                    <Card.Body style={{textAlign:"center", whiteSpace: "pre-line"}} className={this.state.isOpen[i] ? this.state.fullCardClass : this.state.infoCardClass}>
                         <h4>{calendar.name}</h4>
                         <h5>When: {calendar.date}</h5>
                         <h5 className="para" data-link={calendar.mapLink} onClick={this.togglePop}>Where: {calendar.place}</h5>
