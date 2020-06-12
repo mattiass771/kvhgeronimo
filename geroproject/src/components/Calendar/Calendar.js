@@ -121,6 +121,16 @@ class Calendar extends Component {
         }
     }
 
+    activateEvent = () => {
+        const itemIde = e.currentTarget.dataset.itemid
+        axios.post(`http://localhost:5000/calendar/conclude-calendar/${itemIde}`, { active: true } )
+            .then(res => {
+                this.toggleRefresh()
+                console.log(res.data)
+            })
+            .catch((error) => console.log( error.response ) );
+    }
+
     getCalendar = () => {
         let output = []
         let colLeft = []
@@ -183,6 +193,8 @@ class Calendar extends Component {
                         <br />
                         {(localStorage.getItem("isAdmin") && calendar.active) &&
                         <Button data-itemid={calendar._id} data-soldiers={calendar.soldiers} onClick={this.openConclude} variant="danger" style={{marginRight: "5px"}}>Conclude Event</Button>}
+                        {(localStorage.getItem("isAdmin") && !calendar.active) &&
+                        <Button data-itemid={calendar._id} variant="success" onClick={this.activateEvent}>Activate Event</Button>}
                     </Card.Body>
                     <Card.Footer style={{textAlign:"center", height: "20px", fontSize: "180%"}}>
                         <span data-key={i} className="pointer-on-hover card-footer-span" onClick={this.handleClass}>{this.state.handler[i]}</span>
