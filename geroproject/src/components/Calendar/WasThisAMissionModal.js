@@ -41,7 +41,7 @@ class CalendarCompareModal extends Component {
                         })
                         .catch((error) => console.log( error.response ) );
 
-                        axios.post(`http://localhost:5000/calendar/conclude-calendar/${this.props.itemID}`, { active: false } )
+                        axios.post(`https://kvhgeronimo.herokuapp.com/calendar/conclude-calendar/${this.props.itemID}`, { active: false } )
                             .then(res => {
                                 console.log(res.data)
                                 this.props.toggleRefresh()
