@@ -47,7 +47,7 @@ const MainLatest = () => {
                             frameBorder="0"
                             title={link}
                             allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
-                            allowfullscreen
+                            allowFullScreen
                             >
                         </iframe>
                     </Carousel.Item>

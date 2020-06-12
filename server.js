@@ -29,6 +29,7 @@ const galleryRouter = require('./routes/gallery');
 const aboutUsRouter = require('./routes/aboutUs');
 const reportsRouter = require('./routes/reports');
 const calendarRouter = require('./routes/calendar');
+const libraryRouter = require('./routes/library');
 
 app.use('/equipment', equipRouter);
 app.use('/soldier', soldierRouter);
@@ -37,6 +38,7 @@ app.use('/gallery', galleryRouter);
 app.use('/aboutUs', aboutUsRouter);
 app.use('/reports', reportsRouter);
 app.use('/calendar', calendarRouter);
+app.use('/library', libraryRouter);
 app.use(fileUpload())
 
 //Upload Endpoint

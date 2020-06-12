@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 
-import ReportsAddModal from './ReportsAddModal';
-import ReportsEditModal from './ReportsEditModal';
+import LibraryAddModal from './LibraryAddModal';
+import LibraryEditModal from './LibraryEditModal';
 import DeleteFromDb from '../DeleteFromDB';
 
 import { Card, Col, Image, Carousel, Row, Button, Container } from 'react-bootstrap';
@@ -16,7 +16,7 @@ class Reports extends Component {
             fadein: "fadein",
             fadeout: "fadeout",
             handler: [],
-            reports: [],
+            library: [],
             isOpen: [],
             refresh: true,
             popup: false,
@@ -31,9 +31,9 @@ class Reports extends Component {
     }
 
     toggleRefresh = () => {
-        axios.get(`https://kvhgeronimo.herokuapp.com/reports/`)
+        axios.get(`https://kvhgeronimo.herokuapp.com/library/`)
         .then(response => {
-            this.setState({ reports: response.data.reverse() })
+            this.setState({ library: response.data.reverse() })
         })
         .catch(error => {
             console.log(error);
@@ -70,7 +70,7 @@ class Reports extends Component {
     }
 
     getData = () => {
-        for (let el of this.state.reports) {
+        for (let el of this.state.library) {
             this.state.isOpen.push(el.isOpen)
             this.state.handler.push("...")
         }
@@ -86,9 +86,9 @@ class Reports extends Component {
             let finalLink = `https://www.youtube.com/embed/${linkTag[1]}`
             return finalLink
         }
-        for (let report of this.state.reports) {
+        for (let lib of this.state.library) {
             let links = []
-            for (let link of report.links) {
+            for (let link of lib.links) {
                 link.includes("youtube") ?
                 links.push(
                     <Carousel.Item key={link}>
@@ -124,9 +124,9 @@ class Reports extends Component {
             output.push(
                 <Card className="block-background" key={i} style={{marginBottom:"15px", borderRadius:"5px"}}>
                     {localStorage.getItem("isAdmin") &&
-                    <Button onClick={this.toggleDeleteItem} data-itemid={report._id} size="sm" variant="outline-dark" style={{width: "100%", marginBottom: "1px", height:"20px"}}><span style={{position:"relative", top:"-4px"}}>Delete</span></Button>}
+                    <Button onClick={this.toggleDeleteItem} data-itemid={lib._id} size="sm" variant="outline-dark" style={{width: "100%", marginBottom: "1px", height:"20px"}}><span style={{position:"relative", top:"-4px"}}>Delete</span></Button>}
                     {localStorage.getItem("isAdmin") &&
-                    <Button onClick={this.toggleEditItem} data-itemid={report._id} size="sm" variant="outline-dark" style={{width: "100%", height:"20px"}}><span style={{position:"relative", top:"-4px"}}>Edit</span></Button>}
+                    <Button onClick={this.toggleEditItem} data-itemid={lib._id} size="sm" variant="outline-dark" style={{width: "100%", height:"20px"}}><span style={{position:"relative", top:"-4px"}}>Edit</span></Button>}
                     <Card.Header>
                         <Carousel controls={false} interval={null}>
                             {links}
@@ -134,8 +134,8 @@ class Reports extends Component {
                         <Image style={{position: "absolute", top:"-41px"}} src="https://i.imgur.com/jawkXJV.png?3" fluid/>
                     </Card.Header>
                     <Card.Body style={{textAlign:"center", whiteSpace: "pre-line"}} className={this.state.isOpen[i] ? this.state.fullCardClass : this.state.infoCardClass}>
-                        <h3>{report.name}</h3>
-                        <p>{report.text}</p>
+                        <h3>{lib.name}</h3>
+                        <p>{lib.text}</p>
                     </Card.Body>
                     <Card.Footer style={{textAlign:"center", height: "20px", fontSize: "180%"}}>
                         <span data-key={i} className="pointer-on-hover card-footer-span" onClick={this.handleClass}>{this.state.handler[i]}</span>
@@ -163,14 +163,14 @@ class Reports extends Component {
 
     render() {
         return(
-            <>
+            <>  
                 {localStorage.getItem("isAdmin") &&
                 <Row className="justify-content-center">
-                    <Button variant="outline-dark" style={{marginBottom: "15px"}} onClick={this.togglePop}>Add Report</Button>
+                    <Button variant="outline-dark" style={{marginBottom: "15px"}} onClick={this.togglePop}>Add to Library</Button>
                 </Row>}
-                {this.state.deleteItem && <DeleteFromDb toggleRefresh={this.toggleRefresh} collectionID="reports" itemID={this.state.passID} toggleDeleteItem={this.closeDeleteItem} />}
-                {this.state.editItem && <ReportsEditModal itemID={this.state.passID} toggleRefresh={this.toggleRefresh} togglePop={this.closeEditItem} />}
-                {this.state.popup && <ReportsAddModal toggleRefresh={this.toggleRefresh} togglePop={this.togglePop} />}
+                {this.state.deleteItem && <DeleteFromDb toggleRefresh={this.toggleRefresh} collectionID="library" itemID={this.state.passID} toggleDeleteItem={this.closeDeleteItem} />}
+                {this.state.editItem && <LibraryEditModal itemID={this.state.passID} toggleRefresh={this.toggleRefresh} togglePop={this.closeEditItem} />}
+                {this.state.popup && <LibraryAddModal toggleRefresh={this.toggleRefresh} togglePop={this.togglePop} />}
                 {this.getData()}
                 {this.getReports()}
             </>

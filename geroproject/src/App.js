@@ -13,6 +13,7 @@ import OpenGallery from './components/Gallery/OpenGallery';
 import Reports from './components/Reports/Reports';
 import Calendar from './components/Calendar/Calendar';
 import Footer from './components/Footer';
+import Library from './components/Library/Library';
 
 import './App.css';
 
@@ -52,6 +53,7 @@ class App extends Component {
                <Route path="/platoon" exact component={Platoon} />
                <Route path="/gallerycli" exact component={Gallery} />
                <Route path="/reportscli" exact component={Reports} />
+               <Route path="/librarycli" exact component={Library} />
                <Route path="/calendarcli" exact component={Calendar} />
                <Route path="/opengallery" exact component={OpenGallery} />
                <Route path="/soldiers" exact component={Soldiers} />
