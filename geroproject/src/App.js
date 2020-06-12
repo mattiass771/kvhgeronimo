@@ -22,8 +22,7 @@ import './App.css';
    2. Reduce axios calls and pass unnecessary per props
    3. EditItems.js - add state for icon handler (to reduce wait time for check / uncheck)
    4. Moznost misia k reportu  -> ta poputuje do array v databaze -> ta sa bude mapovat na vojakov -> v profile a v modali sa ukazu misie na ktorych sa podielal
-   5. Library - Reporty ale interne (navody a tips n tricks)
- 5,1. Library pred loginom nebude vidiet ale za loginom bude v dropdowne s Reportami - ktore pred loginom nebudu v dropdowne
+   4.1 Conclude Event - prida misiu vsetkym vojakom ktori boli na event prihlaseni aj po conclude
    6. Obsah prerobit do slovenciny
    7. Zmenit heslo: spravit metodu aby mohlo byt heslo ine ako ID
    8. Support Us Route / Important Info Tab - komponenta pred loginom ako Support Us na navbare a za loginom ako Important Info sucastou profilu v Tabe 

@@ -8,14 +8,15 @@ class Profile extends Component {
         super(props)
         this.state = {
             edit: false,
-            myStory: ""
+            myStory: "",
+            missions: []
         }
     }
 
     componentDidMount() {
         axios.get(`https://kvhgeronimo.herokuapp.com/soldier/${localStorage.getItem("id")}`)
             .then(res => {
-                this.setState({ myStory: res.data.story })
+                this.setState({ myStory: res.data.story, missions: res.data.action })
             })
             .catch(err => {
                 console.log(err)
@@ -77,6 +78,11 @@ class Profile extends Component {
                         <Button className="edit-story" variant="outline-light" onClick={this.cancelEdit}>Cancel</Button>
                         </>
                         }
+                    </Col>
+                </Row>
+                <Row>
+                    <Col>
+                        {this.state.missions && console.log(this.state.missions)}
                     </Col>
                 </Row>
                 <Row>

@@ -16,7 +16,7 @@ const soldierSchema = new Schema({
     weight: { type: String },
     height: { type: String },
     story: { type: String },
-    action: { type: String },
+    action: { type: Array },
     squad: { type: String },
     func: { type: String },
     imageURL: { type: String },
