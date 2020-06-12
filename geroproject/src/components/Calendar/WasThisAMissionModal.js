@@ -44,6 +44,7 @@ class CalendarCompareModal extends Component {
                         axios.post(`http://localhost:5000/calendar/conclude-calendar/${this.props.itemID}`, { active: false } )
                             .then(res => {
                                 console.log(res.data)
+                                this.props.toggleRefresh()
                             })
                             .catch((error) => console.log( error.response ) );
 
@@ -62,7 +63,6 @@ class CalendarCompareModal extends Component {
                                 })
                         }
                         this.handleClose()
-                        this.props.toggleRefresh()
                 } else {
                     alert("Mission name already taken, must choose another one.")
                 }
