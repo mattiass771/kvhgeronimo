@@ -123,7 +123,7 @@ class Calendar extends Component {
 
     activateEvent = (e) => {
         const itemIde = e.currentTarget.dataset.itemid
-        axios.post(`http://localhost:5000/calendar/conclude-calendar/${itemIde}`, { active: true } )
+        axios.post(`https://kvhgeronimo.herokuapp.com/calendar/conclude-calendar/${itemIde}`, { active: true } )
             .then(res => {
                 this.toggleRefresh()
                 console.log(res.data)

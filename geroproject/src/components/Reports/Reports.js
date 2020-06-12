@@ -133,7 +133,7 @@ class Reports extends Component {
                         </Carousel>
                         <Image style={{position: "absolute", top:"-41px"}} src="https://i.imgur.com/jawkXJV.png?3" fluid/>
                     </Card.Header>
-                    <Card.Body style={{textAlign:"center", whiteSpace: "pre-line"}} className={this.state.isOpen[i] ? this.state.fullCardClass : this.state.infoCardClass}>
+                    <Card.Body id="report-body" style={{textAlign:"center", whiteSpace: "pre-line"}} className={this.state.isOpen[i] ? this.state.fullCardClass : this.state.infoCardClass}>
                         <h3>{report.name}</h3>
                         <p>{report.text}</p>
                     </Card.Body>
