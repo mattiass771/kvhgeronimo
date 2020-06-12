@@ -17,8 +17,9 @@ router.route('/add').post((req, res) => {
     const link = req.body.link;
     const army = req.body.army;
     const soldiers = req.body.soldiers;
+    const active = true;
 
-    const newCalendar = new Calendar({ name, isOpen, date, place, mapLink, link, text, army, soldiers });
+    const newCalendar = new Calendar({ name, isOpen, date, place, mapLink, link, text, army, soldiers, active });
 
     newCalendar.save()
         .then(() => res.json('Calendar added!'))
@@ -62,6 +63,18 @@ router.route('/update-calendar/:id').post((req, res) => {
 
             calendar.save()
                 .then(() => res.json('Calendar updated!'))
+                .catch(err => res.status(400).json(`Error: ${err}`));
+        })
+        .catch(err => res.status(400).json(`Error: ${err}`));
+});
+
+router.route('/conclude-calendar/:id').post((req, res) => {
+    Calendar.findById(req.params.id)
+        .then(calendar => {
+            calendar.active = req.body.active;
+
+            calendar.save()
+                .then(() => res.json('Calendar concluded!'))
                 .catch(err => res.status(400).json(`Error: ${err}`));
         })
         .catch(err => res.status(400).json(`Error: ${err}`));

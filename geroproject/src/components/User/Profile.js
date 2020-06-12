@@ -8,15 +8,14 @@ class Profile extends Component {
         super(props)
         this.state = {
             edit: false,
-            myStory: "",
-            missions: []
+            myStory: ""
         }
     }
 
     componentDidMount() {
         axios.get(`https://kvhgeronimo.herokuapp.com/soldier/${localStorage.getItem("id")}`)
             .then(res => {
-                this.setState({ myStory: res.data.story, missions: res.data.action })
+                this.setState({ myStory: res.data.story })
             })
             .catch(err => {
                 console.log(err)
@@ -57,6 +56,20 @@ class Profile extends Component {
         ) 
     }
 
+    showMissions = () => {
+        let output = []
+        this.props.soldierData.action.map((val, i) => {
+            i<1 ?
+            output.push(
+                <span key={i}>{val}</span>
+            ) :
+            output.push(
+                <span key={i}>,&nbsp;{val}</span>
+            )
+        })
+        return output
+    }
+
     render() {
         return (
             <Container style={{marginTop:"-24px", borderRadius: "5px"}}>
@@ -81,20 +94,21 @@ class Profile extends Component {
                     </Col>
                 </Row>
                 <Row>
-                    <Col>
-                        {this.state.missions && console.log(this.state.missions)}
-                    </Col>
-                </Row>
-                <Row>
-                    <Col style={{ whiteSpace: "pre-line", marginBottom: "75px" }} sm={{span: 10, offset: 1}} md={{span: 8, offset: 2}}> 
+                    <Col style={{ whiteSpace: "pre-line", marginBottom: "25px" }} sm={{span: 10, offset: 1}} md={{span: 8, offset: 2}}> 
                         <h4 style={{textAlign:"center"}}>My Story</h4>
                         {!this.state.edit ? this.state.myStory : 
                         <textarea
                             onChange={this.handleChange} 
                             name="myStory" 
                             value={this.state.myStory} 
-                            style={{ borderRadius: "10px", width: "105%", height: "300%" }} 
+                            style={{ borderRadius: "10px", width: "105%", height: "250px" }} 
                         />}
+                    </Col>
+                </Row>
+                <Row>
+                    <Col style={{ marginBottom: "25px" }} sm={{span: 10, offset: 1}} md={{span: 8, offset: 2}}>
+                        <h4 style={{textAlign:"center"}}>Missions:&nbsp;</h4>
+                        {this.props.soldierData.action && this.showMissions()}
                     </Col>
                 </Row>
             </Container>

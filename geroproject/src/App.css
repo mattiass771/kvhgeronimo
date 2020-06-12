@@ -135,6 +135,10 @@ body {
   background-image: url(https://i.imgur.com/MrcxQnw.jpg);
 }
 
+.color-tab a:link:hover {
+  opacity: 0.85;
+}
+
 .col-sm-6 {
   text-align: left;
 }

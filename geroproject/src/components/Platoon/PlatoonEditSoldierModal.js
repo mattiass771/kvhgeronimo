@@ -20,7 +20,8 @@ class PlatoonEditSoldierModal extends Component {
             weight: "",
             height: "",
             story: "",
-            action: "",
+            currAction: "",
+            action: [],
             squad: "",
             func: "",
             imageURL: "",
@@ -36,6 +37,12 @@ class PlatoonEditSoldierModal extends Component {
     handleChange = (event) => {
         const {name, value} = event.target
         this.setState({ [name]: value })
+    }
+
+    handleMissions = (event) => {
+        const { value } = event.target
+        this.state.action.push(value)
+        this.setState({ currAction: "" })
     }
 
     componentDidMount() {
@@ -93,6 +100,31 @@ class PlatoonEditSoldierModal extends Component {
 
     handleOnHide = () => {
         console.log("Use Button to hide.")
+    }
+
+    getMissions = () => {
+        let output = []
+        this.props.missionses.map((val,i) => {
+            output.push(
+                <option key={i} value={val}>{val}</option>
+            )
+        })
+        return output
+    }
+
+    spliceMissions = (el) => {
+        this.state.action.splice(this.state.action.indexOf(el),1)
+        this.setState({ currAction: "" })
+    }
+
+    showMissions = () => {
+        let output = []
+        this.state.action.map((val, i) => {
+            output.push(
+                <span key={i}>{val}&nbsp;<Button onClick={() => this.spliceMissions(val)} style={{marginRight:"5px"}} size="sm" variant="outline-dark">x</Button></span>
+            )
+        })
+        return output
     }
 
     render() {
@@ -261,17 +293,17 @@ class PlatoonEditSoldierModal extends Component {
                                 Missions:
                                 <br />
                                 <select 
-                                    value={this.state.action}
-                                    onChange={this.handleChange}
+                                    value={this.state.currAction}
+                                    onChange={this.handleMissions}
                                     name="action"
                                     style={{width: "95%"}}
                                 >
                                     <option value=""></option>
-                                    <option value="Bootcamp I.">Bootcamp I.</option>
-                                    <option value="Bootcamp II.">Bootcamp II.</option>
-                                    <option value="Bootcamp III.">Bootcamp III.</option>
+                                    {this.getMissions()}
                                 </select>
                             </p>
+                            {this.state.action.length > 0 &&
+                            <><h5 style={{ textAlign:"center" }}>Missions:</h5><p style={{ textAlign:"center" }}> {this.showMissions()}</p></>}
                             <textarea
                                 style={{ borderRadius: "10px", width: "100%", height: "300px" }} 
                                 onChange={this.handleChange}

@@ -31,4 +31,16 @@ router.route('/:id').delete((req, res) => {
         .catch(err => res.status(400).json(`Error: ${err}`));
 });
 
+router.route('/update-missions/:id').post((req, res) => {
+    AboutUs.findById(req.params.id)
+        .then(missions => {
+            missions.links = req.body.links;
+
+            missions.save()
+                .then(() => res.json('Missions updated!'))
+                .catch(err => res.status(400).json(`Error: ${err}`));
+        })
+        .catch(err => res.status(400).json(`Error: ${err}`));
+});
+
 module.exports = router;

@@ -8,6 +8,7 @@ import CalendarLocationModal from './CalendarLocationModal';
 import CalendarRecruitSoldier from './CalendarRecruitSoldier';
 import CalendarRecruitSoldiersAdmin from './CalendarRecruitSoldiersAdmin';
 import CalendarRemoveSoldiersAdmin from './CalendarRemoveSoldiersAdmin';
+import WasThisAMissionModal from './WasThisAMissionModal';
 import DeleteFromDb from '../DeleteFromDB';
 
 import { Card, Col,  Row, Button, Image, Container } from 'react-bootstrap';
@@ -33,7 +34,9 @@ class Calendar extends Component {
             passMapLink: "",
             deleteItem: false,
             passID: "",
-            editItem: false
+            editItem: false,
+            concludeItem: false,
+            passSoldiers: ""
         }
     }
 
@@ -93,6 +96,14 @@ class Calendar extends Component {
 
     closeEditItem = () => {
         this.setState({ editItem: !this.state.editItem, passID: "" })
+    }
+
+    openConclude = (e) => {
+        this.setState({ concludeItem: !this.state.concludeItem, passID: e.currentTarget.dataset.itemid, passSoldiers: e.currentTarget.dataset.soldiers })
+    }
+
+    closeConclude = () => {
+        this.setState({ concludeItem: !this.state.concludeItem, passID: "", passSoldiers: "" })
     }
     //
 
@@ -157,16 +168,21 @@ class Calendar extends Component {
                         <h5 className="para" data-link={calendar.mapLink} onClick={this.togglePop}>Where: {calendar.place}</h5>
                         <h5>Unit: {isNaN(calendar.army) ? calendar.army.toUpperCase() : calendar.army[calendar.army.length-1] === '1' ? `${calendar.army}st` : calendar.army[calendar.army.length-1] === '2' ? `${calendar.army}nd` : calendar.army[calendar.army.length-1] === '3' ? `${calendar.army}rd` : `${calendar.army}nd`}</h5>
                         <p>{calendar.text}</p>
-                        {localStorage.getItem("isAdmin") &&
+                        {(localStorage.getItem("isAdmin") && calendar.active) &&
                         <span>
                             Add: <CalendarRecruitSoldiersAdmin refresh={this.toggleRefresh} calendarSoldiers={calendar.soldiers} soldierData={this.state.soldierData} calendarID={calendar._id} />
                             {calendar.soldiers.length > 0 &&
                             <span>Remove: <CalendarRemoveSoldiersAdmin refresh={this.toggleRefresh} calendarSoldiers={calendar.soldiers} soldierData={this.state.soldierData} calendarID={calendar._id} /></span>}
-                        </span>}
-                        <p style={{marginTop:"15px"}}><CalendarRecruitSoldier refresh={this.toggleRefresh} calendarSoldiers={calendar.soldiers} soldierData={this.state.soldierData} calendarID={calendar._id} /></p>
+                        </span>} 
+                        {calendar.active &&
+                        <p style={{marginTop:"15px"}}><CalendarRecruitSoldier refresh={this.toggleRefresh} calendarSoldiers={calendar.soldiers} soldierData={this.state.soldierData} calendarID={calendar._id} /></p>}
                         <h5>Recruited: </h5>
                         <p>{showSoldiers()}</p>
                         <Button onClick={this.openItems} data-id={sold} data-army={calendar.army} variant="outline-dark" style={{marginRight: "5px"}}>Show Missing Items</Button>
+                        <br />
+                        <br />
+                        {(localStorage.getItem("isAdmin") && calendar.active) &&
+                        <Button data-itemid={calendar._id} data-soldiers={calendar.soldiers} onClick={this.openConclude} variant="danger" style={{marginRight: "5px"}}>Conclude Event</Button>}
                     </Card.Body>
                     <Card.Footer style={{textAlign:"center", height: "20px", fontSize: "180%"}}>
                         <span data-key={i} className="pointer-on-hover card-footer-span" onClick={this.handleClass}>{this.state.handler[i]}</span>
@@ -204,6 +220,7 @@ class Calendar extends Component {
                 {this.state.addEvent && <CalendarAddModal toggleRefresh={this.toggleRefresh} toggleAddEvent={this.toggleAddEvent} />}
                 {this.state.popup && <CalendarLocationModal mapLink={this.state.passMapLink} closePop={this.closePop} togglePop={this.togglePop} />}
                 {this.state.items && <CalendarCompareModal army={this.state.passArmy} soldierID={this.state.passSoldID} closeItems={this.closeItems} openItems={this.openItems} />}
+                {this.state.concludeItem && <WasThisAMissionModal soldiers={this.state.passSoldiers} itemID={this.state.passID} toggleRefresh={this.toggleRefresh} closePop={this.closeConclude} />}
                 {this.getData()}
                 {this.getCalendar()}
             </>

@@ -17,7 +17,8 @@ class Platoon extends Component {
             addSoldier: false,
             deleteItem: false,
             editItem: false,
-            passID: ""
+            passID: "",
+            missions: []
         }
     }
 
@@ -25,6 +26,13 @@ class Platoon extends Component {
         axios.get(`https://kvhgeronimo.herokuapp.com/soldier/`)
             .then(response => {
                 this.setState({ soldierData: response.data })
+            })
+            .catch(error => {
+                console.log(error);
+            });
+        axios.get(`https://kvhgeronimo.herokuapp.com/aboutUs/missions`)
+            .then(response => {
+                this.setState({ missions: response.data.links })
             })
             .catch(error => {
                 console.log(error);
@@ -149,8 +157,8 @@ class Platoon extends Component {
                     <Button variant="outline-dark" style={{marginBottom: "15px"}} onClick={this.toggleAddSoldier}>Add Soldier</Button>
                 </Row>}
                 {this.state.deleteItem && <DeleteFromDb toggleRefresh={this.toggleRefresh} collectionID="soldier" itemID={this.state.passID} toggleDeleteItem={this.closeDeleteItem} />}
-                {this.state.editItem && <PlatoonEditSoldierModal itemID={this.state.passID} toggleRefresh={this.toggleRefresh} togglePop={this.closeEditItem} />}
-                {this.state.addSoldier && <PlatoonAddSoldierModal toggleRefresh={this.toggleRefresh} toggleAddSoldier={this.toggleAddSoldier} />}
+                {this.state.editItem && <PlatoonEditSoldierModal missionses={this.state.missions} itemID={this.state.passID} toggleRefresh={this.toggleRefresh} togglePop={this.closeEditItem} />}
+                {this.state.addSoldier && <PlatoonAddSoldierModal missionses={this.state.missions} toggleRefresh={this.toggleRefresh} toggleAddSoldier={this.toggleAddSoldier} />}
                 {this.getSoldiers()}
                 {this.state.popup && <ProfileModal popup={this.state.popup} fadePop={this.fadePop} soldierID={this.state.soldierID} />}
             </Container>

@@ -36,6 +36,20 @@ class ShowProfileInModal extends Component {
         ) 
     }
 
+    showMissions = () => {
+        let output = []
+        this.props.soldierData.action.map((val, i) => {
+            i<1 ?
+            output.push(
+                <span key={i}>{val}</span>
+            ) :
+            output.push(
+                <span key={i}>,&nbsp;{val}</span>
+            )
+        })
+        return output
+    }
+
     render() {
         return (
             <Container>
@@ -56,6 +70,14 @@ class ShowProfileInModal extends Component {
                     </Col>
                 </Row> :
                 false}
+                <br />
+                <Row>
+                    <Col sm={{span: 10, offset: 1}} md={{span: 8, offset: 2}}>
+                        {(this.props.soldierData.action && this.props.soldierData.action.length > 0) &&
+                        <><h4 style={{textAlign:"center"}}>Missions:&nbsp;</h4>
+                        {this.showMissions()}</>}
+                    </Col>
+                </Row>
             </Container>
         )
     }

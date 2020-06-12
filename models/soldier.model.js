@@ -20,7 +20,7 @@ const soldierSchema = new Schema({
     squad: { type: String },
     func: { type: String },
     imageURL: { type: String },
-    equip: { type: Object, required: true }
+    equip: { type: Object }
 })
 
 const Soldier = mongoose.model('Soldier', soldierSchema);

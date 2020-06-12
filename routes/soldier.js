@@ -72,6 +72,18 @@ router.route('/update-story/:id').post((req, res) => {
         .catch(err => res.status(400).json(`Error: ${err}`));
 });
 
+router.route('/update-action/:id').post((req, res) => {
+    Soldier.findById(req.params.id)
+        .then(soldier => {
+            soldier.action = req.body.action;
+
+            soldier.save()
+                .then(() => res.json('Action updated!'))
+                .catch(err => res.status(400).json(`Error: ${err}`));
+        })
+        .catch(err => res.status(400).json(`Error: ${err}`));
+});
+
 router.route('/update-soldier/:id').post((req, res) => {
     Soldier.findById(req.params.id)
         .then(soldier => {

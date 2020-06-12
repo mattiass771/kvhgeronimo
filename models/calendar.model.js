@@ -11,7 +11,8 @@ const calendarSchema = new Schema({
     text: { type: String, required: true},
     link: { type: String, required: true},
     army: { type: String, required: true},
-    soldiers: { type: Array, required: true}
+    soldiers: { type: Array, required: true},
+    active: { type: Boolean, reqiuired: true }
 }, {
     timestamps: true,
 })
