@@ -121,7 +121,7 @@ class Calendar extends Component {
         }
     }
 
-    activateEvent = () => {
+    activateEvent = (e) => {
         const itemIde = e.currentTarget.dataset.itemid
         axios.post(`http://localhost:5000/calendar/conclude-calendar/${itemIde}`, { active: true } )
             .then(res => {
