@@ -19,12 +19,13 @@ import './App.css';
 
 // TODOS //
 /*
+   1. TODO
    2. Reduce axios calls and pass unnecessary per props
    3. EditItems.js - add state for icon handler (to reduce wait time for check / uncheck)
    6. Obsah prerobit do slovenciny
    7. Zmenit heslo: spravit metodu aby mohlo byt heslo ine ako ID
    8. Support Us Route / Important Info Tab - komponenta pred loginom ako Support Us na navbare a za loginom ako Important Info sucastou profilu v Tabe 
-   99. Create Manual for Admins on DB-Attributes and how to handle inputs
+   9. Create Manual for Admins on DB-Attributes and how to handle inputs
 */
 
 class App extends Component {
