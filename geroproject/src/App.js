@@ -19,7 +19,7 @@ import './App.css';
 
 // TODOS //
 /*
-   1. TODO
+   1. pridat do databazy atributy vojakov (function, rank a tak)
    2. Reduce axios calls and pass unnecessary per props
    3. EditItems.js - add state for icon handler (to reduce wait time for check / uncheck)
    6. Obsah prerobit do slovenciny

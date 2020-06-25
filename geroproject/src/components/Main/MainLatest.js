@@ -91,7 +91,7 @@ const MainLatest = () => {
                     </Card>
                 </Col>
                 <Col lg={6}>
-                    <h3 style={{textAlign: "center"}}>UPCOMING EVENT</h3>
+                    <h3 style={{textAlign: "center"}}>LATEST/UPCOMING EVENT</h3>
                     <Card className="block-background" style={{marginBottom:"15px", borderRadius:"5px"}}>
                         <Card.Header style={{textAlign:"center", height: "325px"}}>
                             <Image style={{position: "absolute", top:"-41px"}} src="https://i.imgur.com/jawkXJV.png?3" fluid/>

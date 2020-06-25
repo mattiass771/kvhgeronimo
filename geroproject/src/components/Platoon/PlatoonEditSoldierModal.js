@@ -263,6 +263,7 @@ class PlatoonEditSoldierModal extends Component {
                                     style={{width: "95%"}}
                                 >
                                     <option value=""></option>
+                                    <option value="Administration">Administration</option>
                                     <option value="Rifle Man">Rifle Man</option>
                                     <option value="2nd Assistant SQ Leader">2nd Assistant SQ Leader</option>
                                     <option value="2nd in Charge">2nd in Charge</option>
