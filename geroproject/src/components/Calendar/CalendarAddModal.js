@@ -81,7 +81,7 @@ class CalendarAddModal extends Component {
                                 type="text"
                                 name="date"
                                 value={this.state.date}
-                                placeholder="Date of the Event"
+                                placeholder="Date of the Event, format: June 6th, 2020"
                             />
                             <input
                                 style={{ borderRadius: "10px", width:"100%", textAlign: "center", marginBottom: "15px" }}

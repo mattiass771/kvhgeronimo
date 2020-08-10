@@ -107,7 +107,7 @@ class LibraryAddModal extends Component {
                             <Button variant="outline-dark" style={{ top:"10px" }} size="sm" onClick={this.addLink}>Add Link</Button>
                             {this.showLinks()}
                         </form>
-                        <Button variant="dark" style={{ width: "100%" }} onClick={this.addReport}>Upload Report</Button>
+                        <Button variant="dark" style={{ width: "100%" }} onClick={this.addReport}>Upload Post</Button>
                     </Container>
                 </Modal.Body>
             </Modal>

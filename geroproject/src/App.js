@@ -14,6 +14,7 @@ import Reports from './components/Reports/Reports';
 import Calendar from './components/Calendar/Calendar';
 import Footer from './components/Footer';
 import Library from './components/Library/Library';
+import Information from './components/Information/Information';
 
 import './App.css';
 
@@ -23,9 +24,8 @@ import './App.css';
    2. Reduce axios calls and pass unnecessary per props
    3. EditItems.js - add state for icon handler (to reduce wait time for check / uncheck)
    6. Obsah prerobit do slovenciny
-   7. Zmenit heslo: spravit metodu aby mohlo byt heslo ine ako ID
    8. Support Us Route / Important Info Tab - komponenta pred loginom ako Support Us na navbare a za loginom ako Important Info sucastou profilu v Tabe 
-   9. Create Manual for Admins on DB-Attributes and how to handle inputs
+   10. pre adminov pridavanie a vymazavanie akcii len tak
 */
 
 class App extends Component {
@@ -55,6 +55,7 @@ class App extends Component {
                <Route path="/calendarcli" exact component={Calendar} />
                <Route path="/opengallery" exact component={OpenGallery} />
                <Route path="/soldiers" exact component={Soldiers} />
+               <Route path="/info" exact component={Information} />
                <Route path="/user" exact component={User} />
                <Route path="/login" render={(props) => <Login {...props} loggingOn={this.handleLogin} /> } />
                <Footer />

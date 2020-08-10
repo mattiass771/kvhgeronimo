@@ -24,6 +24,9 @@ function Navibar() {
                         <Nav.Link href="/reportscli">Reports</Nav.Link>}
                         {localStorage.getItem("logged") && 
                         <Nav.Link href="/calendarcli">Calendar</Nav.Link>}
+                        {localStorage.getItem("logged") ? 
+                        <Nav.Link href="/info">Information</Nav.Link> :
+                        <Nav.Link href="/info">Support Us</Nav.Link>}
                     </Nav>
                 </Navbar.Collapse>
                 <Navbar.Collapse className="justify-content-end">

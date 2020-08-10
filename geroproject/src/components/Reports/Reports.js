@@ -128,9 +128,7 @@ class Reports extends Component {
                     {localStorage.getItem("isAdmin") &&
                     <Button onClick={this.toggleEditItem} data-itemid={report._id} size="sm" variant="outline-dark" style={{width: "100%", height:"20px"}}><span style={{position:"relative", top:"-4px"}}>Edit</span></Button>}
                     <Card.Header>
-                        <Carousel controls={false} interval={null}>
-                            {links}
-                        </Carousel>
+                        {(links.length === 1) ? <Carousel indicators={false} controls={false} interval={null}>{links}</Carousel> : <Carousel controls={false} interval={null}>{links}</Carousel>}
                         <Image style={{position: "absolute", top:"-41px"}} src="https://i.imgur.com/jawkXJV.png?3" fluid/>
                     </Card.Header>
                     <Card.Body id="report-body" style={{textAlign:"center", whiteSpace: "pre-line"}} className={this.state.isOpen[i] ? this.state.fullCardClass : this.state.infoCardClass}>
