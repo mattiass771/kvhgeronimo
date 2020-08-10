@@ -1,40 +1,49 @@
 import React from 'react';
 
-import { Container, Row, Col } from 'react-bootstrap';
+import { Container, Row, Col, Image } from 'react-bootstrap';
 
 const Information = () => {
     return (
         <Container>
-            <Row>
+            <h3 style={{textAlign:"center"}}>Chcete nás podporiť? / Do you want to support us?</h3><br />
+            <Row style={{textAlign:"center"}}>  
                 <Col>
-                    <h2>SK91650000000000 20555150</h2>
-                    <h2>IČO42164656</h2>
-                    <h2>Predseda Klubu</h2>
+                    <p>KVH Geronimo je dobrovoľné, nevládne a neziskové združenie občanov. Nepodporuje, nesympatizuje a nepropaguje žiadnu politickú stranu alebo hnutie šíriace rasovú, náboženskú ani inú diskrimináciu a násilie.</p>
+                    <p>Venujeme sa vojenskej histórii, s cieľom vzdať hold pamiatke padlým a preživším vojakom bojujúcim v druhej svetovej vojne.</p>
+                    <p>Ak vás náš klub zaujal natoľko, že by ste sa k nám chceli pridať, Uncle Sam hľadá stále nových dobrovoľníkov!</p>
+                    <Image height="180px" src="https://i.imgur.com/Abo0GBr.png" />
+                </Col>
+                <Col>
+                    <h5>Kúpou "War Bondov" podporíte klub v jeho aktivitách a ďaľšom fungovaní!<br />/ Buy "War Bonds" to support the group in its further activities!</h5>
+                    <form style={{marginTop: "10px", marginLeft: "5px"}} action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_blank">
+                        <input type="hidden" name="cmd" value="_s-xclick" />
+                        <input type="hidden" name="hosted_button_id" value="JUQ9T6D7B9YQJ" />
+                        <input className="war-bonds" type="image" src="https://i.imgur.com/YJkl54P.png?1" height="350px" border="0" name="submit" alt="" />
+                    </form>
+                </Col>
+            </Row>
+            <br />
+            <h3 style={{textAlign:"center"}}>Informácie o klube</h3><br />
+            <Row style={{textAlign:"center"}}>
+                <Col>
+                    <h4>Číslo účtu</h4>
+                    <p>SK9165000000000020555150</p>
+                    <h4>IČO</h4>
+                    <p>42164656</p>
+                    <h4>Predseda Klubu</h4>
                     <p>Dávid Stojaspal</p>
-                    <h2>Podpredseda Klubu</h2>
+                    <h4>Podpredseda Klubu</h4>
                     <p>Andrej Ladanyi</p>
                 </Col>
                 <Col>
-                    <h3>Email</h3>
+                    <h4>Email</h4>
                     <p>kvh.geronimo@gmail.com</p>
-                    <h3>Sídlo</h3>
+                    <h4>Sídlo</h4>
                     <p>KVH Geronimo, (Klub Vojenskej Histórie Geronimo) Novoviesska 212 94634 Bátorove Kosihy</p>
                     <h4>Právna forma</h4>
                     <p>Združenie (zväz,spolok)</p>
                 </Col>
             </Row>    
-            <Row>
-                    <h4>Chcete nás podporiť? / Do you want to support us?</h4>
-                    <p>KVH Geronimo je dobrovoľné, nevládne a neziskové združenie občanov. Nepodporuje, nesympatizuje a nepropaguje žiadnu politickú stranu alebo hnutie šíriace rasovú, náboženskú ani inú diskrimináciu a násilie.</p>
-                    <p>Venujeme sa vojenskej histórii, s cieľom vzdať hold pamiatke padlým a preživším vojakom bojujúcim v druhej svetovej vojne.</p>
-                    <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_blank">
-                        <input type="hidden" name="cmd" value="_s-xclick" />
-                        <input type="hidden" name="hosted_button_id" value="JUQ9T6D7B9YQJ" />
-                        <input type="image" src="https://images-na.ssl-images-amazon.com/images/I/71mWjwc2QOL._AC_SY741_.jpg" width="auto" height="250px" border="0" name="submit" title="PayPal - The safer, easier way to pay online!" alt="Donate with PayPal button" />
-                        <img alt="" border="0" src="https://www.paypal.com/en_SK/i/scr/pixel.gif" width="1" height="1" />
-                    </form>
-                    <img width="auto" height="250px" src="https://i.pinimg.com/originals/8e/29/85/8e29853f519282314f09022d4da3b921.png" />
-            </Row>
         </Container>
     )
 }
