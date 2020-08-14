@@ -18,7 +18,8 @@ class Platoon extends Component {
             deleteItem: false,
             editItem: false,
             passID: "",
-            missions: []
+            missions: [],
+            missionData: []
         }
     }
 
@@ -30,9 +31,10 @@ class Platoon extends Component {
             .catch(error => {
                 console.log(error);
             });
+
         axios.get(`https://kvhgeronimo.herokuapp.com/aboutUs/missions`)
             .then(response => {
-                this.setState({ missions: response.data.links })
+                this.setState({ missions: response.data.links, missionData: response.data.text })
             })
             .catch(error => {
                 console.log(error);
@@ -160,7 +162,7 @@ class Platoon extends Component {
                 {this.state.editItem && <PlatoonEditSoldierModal missionses={this.state.missions} itemID={this.state.passID} toggleRefresh={this.toggleRefresh} togglePop={this.closeEditItem} />}
                 {this.state.addSoldier && <PlatoonAddSoldierModal missionses={this.state.missions} toggleRefresh={this.toggleRefresh} toggleAddSoldier={this.toggleAddSoldier} />}
                 {this.getSoldiers()}
-                {this.state.popup && <ProfileModal popup={this.state.popup} fadePop={this.fadePop} soldierID={this.state.soldierID} />}
+                {this.state.popup && <ProfileModal missionData={this.state.missionData} popup={this.state.popup} fadePop={this.fadePop} soldierID={this.state.soldierID} />}
             </Container>
         )
     }

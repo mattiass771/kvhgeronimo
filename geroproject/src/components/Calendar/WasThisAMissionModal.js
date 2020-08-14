@@ -10,7 +10,10 @@ class CalendarCompareModal extends Component {
             popup: true,
             link: "",
             missions: [],
-            currMission: ""
+            currMission: "",
+            moreMissionInfo: "",
+            points: "",
+            missionsArray: []
         }  
     }
 
@@ -22,7 +25,7 @@ class CalendarCompareModal extends Component {
     componentDidMount() {
         axios.get(`https://kvhgeronimo.herokuapp.com/aboutUs/missions`)
             .then(res => {
-                this.setState({ missions: res.data.links })
+                this.setState({ missions: res.data.links, missionsArray: res.data.text })
             })
             .catch(err => {
                 console.log(err.data)
@@ -31,13 +34,16 @@ class CalendarCompareModal extends Component {
 
     submitMission = () => {
         this.state.currMission.length>2 && this.state.missions.push(this.state.currMission)
+
+        this.state.currMission.length>2 && this.state.missionsArray.push({ name: this.state.currMission, type: this.state.moreMissionInfo, points: parseInt(this.state.points) })
+        console.log(this.state.missionsArray)
         
         axios.get(`https://kvhgeronimo.herokuapp.com/aboutUs/missions`)
             .then(resp => {
                 if (!resp.data.links.includes(this.state.currMission)) {
-                    axios.post(`https://kvhgeronimo.herokuapp.com/aboutUs/update-missions/missions`, { links: this.state.missions } )
+                    axios.post(`https://kvhgeronimo.herokuapp.com/aboutUs/update-missions/missions`, { links: this.state.missions, text: this.state.missionsArray } )
                         .then(res => {
-                            console.log(res.data)
+                            console.log(res.data, this.state.missionsArray)
                         })
                         .catch((error) => console.log( error.response ) );
 
@@ -85,6 +91,18 @@ class CalendarCompareModal extends Component {
     handleChange = (e) => {
         const { name, value } = e.target
         this.setState({ [name]: value })
+
+        if (name === "moreMissionInfo") {
+            this.setState({ points: 
+                value === "other" ? "5" :
+                value === "otherInt" ? "10" :
+                value === "airsoft" ? "15" :
+                value === "airsoftMulti" ? "30" :
+                value === "bootcamp" ? "50" :
+                value === "livingHistory" ? "100" :
+                value === "paraTraining" && "250" 
+            })
+        }
     }
 
     render() {
@@ -100,6 +118,19 @@ class CalendarCompareModal extends Component {
                             type="text"
                             placeholder="Mission Name"
                         />
+                        <select 
+                            value={this.state.moreMissionInfo}
+                            onChange={this.handleChange}
+                            name="moreMissionInfo"
+                        >
+                            <option value="other">Other, 5p</option>
+                            <option value="otherInt">Other (International), 10p</option>
+                            <option value="airsoft">Airsoft (One Day), 15p</option>
+                            <option value="airsoftMulti">Airsoft (More Days), 30p</option>
+                            <option value="bootcamp">Bootcamp / March, 50p</option>
+                            <option value="livingHistory">Living History, 100p</option>
+                            <option value="paraTraining">Para Training, 250p</option>
+                        </select>
                         &nbsp;
                         <Button variant="outline-dark" onClick={this.submitMission}>Yes</Button><br />
                         <Button style={{marginTop:"5px"}} variant="outline-dark" onClick={this.concludeOnly}>No, but still conclude.</Button><br />

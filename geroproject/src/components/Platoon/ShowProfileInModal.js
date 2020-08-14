@@ -38,6 +38,7 @@ class ShowProfileInModal extends Component {
 
     showMissions = () => {
         let output = []
+
         this.props.soldierData.action.map((val, i) => {
             i<1 ?
             output.push(
@@ -50,6 +51,17 @@ class ShowProfileInModal extends Component {
         return output
     }
 
+    getPoints = () => {
+        let result = 0
+        this.props.soldierData.action.map((val) => {
+            const tempPoints = this.props.missionData.map(el => val === el.name && el.points)
+            const number = tempPoints.reduce((a,b)=>a+b)
+            result += parseInt(number)
+        })
+
+        return result
+    }
+
     render() {
         return (
             <Container>
@@ -57,6 +69,7 @@ class ShowProfileInModal extends Component {
                     <Col lg={{span:4, offset:2}} style={{textAlign:"center"}}>
                         <Image style={{ marginTop: "40px" }} src={this.props.soldierData.imageURL ? this.props.soldierData.imageURL : 
                             "https://i.ibb.co/RYtTKY1/emptypicture.jpg"} thumbnail fluid />
+                         {(this.props.soldierData.action && this.props.soldierData.action.length > 0) && <h5>Points: {this.getPoints()}</h5>}
                     </Col>
                     <Col lg={4} style={{textAlign:"center"}}>
                         {this.getSoldierInfo()}

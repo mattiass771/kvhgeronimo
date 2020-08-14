@@ -32,7 +32,7 @@ class ProfileModal extends Component {
         return (    
             <Modal size="lg" show={this.state.popup} onHide={this.handleClose}>
                 <Modal.Body className="block-background">
-                    {this.state.soldierData && <ShowProfileInModal close={this.handleClose} soldierID={this.props.soldierID} soldierData={this.state.soldierData} />}
+                    {this.state.soldierData && <ShowProfileInModal missionData={this.props.missionData} close={this.handleClose} soldierID={this.props.soldierID} soldierData={this.state.soldierData} />}
                 </Modal.Body>
                 <Modal.Footer className="block-background">
                     <Button variant="outline-dark" onClick={this.handleClose}>Close</Button>

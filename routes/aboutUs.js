@@ -35,6 +35,7 @@ router.route('/update-missions/:id').post((req, res) => {
     AboutUs.findById(req.params.id)
         .then(missions => {
             missions.links = req.body.links;
+            missions.text = req.body.text;
 
             missions.save()
                 .then(() => res.json('Missions updated!'))
