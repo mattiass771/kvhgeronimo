@@ -123,6 +123,7 @@ class CalendarCompareModal extends Component {
                             onChange={this.handleChange}
                             name="moreMissionInfo"
                         >
+                            <option value="notSelected">Vyber Typ Akcie</option>
                             <option value="other">Other, 5p</option>
                             <option value="otherInt">Other (International), 10p</option>
                             <option value="airsoft">Airsoft (One Day), 15p</option>
