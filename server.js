@@ -14,7 +14,7 @@ const port = process.env.PORT || 5000;
 app.use (function (req, res, next) {
     if (req.secure) {
             next();
-    } else {
+    } else if (!req.secure) {
             res.redirect('https://' + req.headers.host + req.url);
     }
 });
