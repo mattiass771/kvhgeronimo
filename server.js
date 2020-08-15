@@ -11,12 +11,12 @@ require('dotenv').config();
 const app = express();
 const port = process.env.PORT || 5000;
 
-app.use (function (req, res, next) {
-    if (req.secure) {
-            next();
-    } else if (!req.secure) {
-            res.redirect('https://' + req.headers.host + req.url);
-    }
+app.use(function (req, res, next){
+    if(req.headers["x-forwarded-proto"] === "https"){
+        // OK, continue
+        return next();
+    };
+    res.redirect('https://'+req.hostname+req.url);
 });
 
 app.use(cors());
