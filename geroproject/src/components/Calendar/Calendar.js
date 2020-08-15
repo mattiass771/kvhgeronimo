@@ -175,7 +175,8 @@ class Calendar extends Component {
                     <Card.Body style={{textAlign:"center", whiteSpace: "pre-line"}} className={this.state.isOpen[i] ? this.state.fullCardClass : this.state.infoCardClass}>
                         <h4>{calendar.name}</h4>
                         <h5>When: {calendar.date}</h5>
-                        <h5 className="para" data-link={calendar.mapLink.length > 0 ? calendar.mapLink : false} onClick={this.togglePop}>Where: {calendar.place}</h5>
+                        {calendar.place.length > 0 ^^
+                        <h5 className="para" data-link={calendar.mapLink.length > 0 ? calendar.mapLink : false} onClick={this.togglePop}>Where: {calendar.place}</h5>}
                         {calendar.army.length > 0 &&
                         <h5>Unit: {isNaN(calendar.army) ? calendar.army.toUpperCase() : calendar.army[calendar.army.length-1] === '1' ? `${calendar.army}st` : calendar.army[calendar.army.length-1] === '2' ? `${calendar.army}nd` : calendar.army[calendar.army.length-1] === '3' ? `${calendar.army}rd` : `${calendar.army}th`}</h5>}
                         <p>{calendar.text}</p>
