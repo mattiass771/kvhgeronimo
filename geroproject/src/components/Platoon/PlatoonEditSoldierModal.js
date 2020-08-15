@@ -266,6 +266,7 @@ class PlatoonEditSoldierModal extends Component {
                                     <option value="Administration">Administration</option>
                                     <option value="Rifle Man">Rifle Man</option>
                                     <option value="2nd Assistant SQ Leader">2nd Assistant SQ Leader</option>
+                                    <option value="Assistant SQ Leader">Assistant SQ Leader</option>
                                     <option value="2nd in Charge">2nd in Charge</option>
                                     <option value="Squad Leader">Squad Leader</option>
                                     <option value="Technician Fifth Grade">Technician Fifth Grade</option>

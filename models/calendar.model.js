@@ -7,10 +7,10 @@ const calendarSchema = new Schema({
     isOpen: { type: Boolean, required: true},
     date: { type: String, required: true},
     place: { type: String, required: true},
-    mapLink: { type: String, required: true},
-    text: { type: String, required: true},
+    mapLink: { type: String },
+    text: { type: String },
     link: { type: String, required: true},
-    army: { type: String, required: true},
+    army: { type: String },
     soldiers: { type: Array, required: true},
     active: { type: Boolean, reqiuired: true }
 }, {

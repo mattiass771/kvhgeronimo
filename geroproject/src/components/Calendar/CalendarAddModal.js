@@ -108,6 +108,7 @@ class CalendarAddModal extends Component {
                                     onChange={this.handleChange}
                                     name="army"
                                 >
+                                    <option value="none">None</option>
                                     <option value="509">509th</option>
                                     <option value="101">101st</option>
                                     <option value="armored">Armored</option>
