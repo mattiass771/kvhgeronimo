@@ -176,7 +176,8 @@ class Calendar extends Component {
                         <h4>{calendar.name}</h4>
                         <h5>When: {calendar.date}</h5>
                         <h5 className="para" data-link={calendar.mapLink} onClick={this.togglePop}>Where: {calendar.place}</h5>
-                        <h5>Unit: {isNaN(calendar.army) ? calendar.army.toUpperCase() : calendar.army[calendar.army.length-1] === '1' ? `${calendar.army}st` : calendar.army[calendar.army.length-1] === '2' ? `${calendar.army}nd` : calendar.army[calendar.army.length-1] === '3' ? `${calendar.army}rd` : `${calendar.army}nd`}</h5>
+                        {calendar.army.length > 0 &&
+                        <h5>Unit: {isNaN(calendar.army) ? calendar.army.toUpperCase() : calendar.army[calendar.army.length-1] === '1' ? `${calendar.army}st` : calendar.army[calendar.army.length-1] === '2' ? `${calendar.army}nd` : calendar.army[calendar.army.length-1] === '3' ? `${calendar.army}rd` : `${calendar.army}th`}</h5>}
                         <p>{calendar.text}</p>
                         {(localStorage.getItem("isAdmin") && calendar.active) &&
                         <span>
@@ -188,7 +189,8 @@ class Calendar extends Component {
                         <p style={{marginTop:"15px"}}><CalendarRecruitSoldier refresh={this.toggleRefresh} calendarSoldiers={calendar.soldiers} soldierData={this.state.soldierData} calendarID={calendar._id} /></p>}
                         <h5>Recruited: </h5>
                         <p>{showSoldiers()}</p>
-                        <Button onClick={this.openItems} data-id={sold} data-army={calendar.army} variant="outline-dark" style={{marginRight: "5px"}}>Show Missing Items</Button>
+                        {calendar.army.length > 0 &&
+                        <Button onClick={this.openItems} data-id={sold} data-army={calendar.army} variant="outline-dark" style={{marginRight: "5px"}}>Show Missing Items</Button>}
                         <br />
                         <br />
                         {(localStorage.getItem("isAdmin") && calendar.active) &&
