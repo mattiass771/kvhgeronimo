@@ -106,7 +106,6 @@ const MainLatest = () => {
                         <Card.Body style={{textAlign:"center"}}>
                             <h3>{calendar.name}</h3>
                             <h4>{calendar.date}</h4>
-                            <p>{calendar.text}</p>
                         </Card.Body>
                     </Card>
                 </Col>
