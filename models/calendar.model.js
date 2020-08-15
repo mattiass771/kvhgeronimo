@@ -6,7 +6,7 @@ const calendarSchema = new Schema({
     name: { type: String, required: true},
     isOpen: { type: Boolean, required: true},
     date: { type: String, required: true},
-    place: { type: String, required: true},
+    place: { type: String },
     mapLink: { type: String },
     text: { type: String },
     link: { type: String, required: true},
