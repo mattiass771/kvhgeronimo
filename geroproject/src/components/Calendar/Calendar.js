@@ -43,7 +43,9 @@ class Calendar extends Component {
     toggleRefresh = () => {
         axios.get(`https://kvhgeronimo.herokuapp.com/calendar/`)
             .then(response => {
-                this.setState({ calendar: response.data.reverse() })
+                this.setState({ calendar: response.data })
+                this.sortCalendar()
+                this.setState({ calendar: this.state.calendar.reverse() })
             })
             .catch(error => {
                 console.log(error);
@@ -59,6 +61,17 @@ class Calendar extends Component {
             .catch(error => {
                 console.log(error);
             });
+    }
+
+    sortCalendar = () => {
+        let temp = this.state.calendar.splice(74, 1)
+        this.state.calendar.splice(1,0,temp[0])
+        temp = this.state.calendar.splice(77, 1)
+        this.state.calendar.splice(33,0,temp[0])
+        temp = this.state.calendar.splice(76, 1)
+        this.state.calendar.splice(34,0,temp[0])
+        temp = this.state.calendar.splice(77, 1)
+        this.state.calendar.splice(53,0,temp[0])
     }
 
     //POPUP HANDLERS
