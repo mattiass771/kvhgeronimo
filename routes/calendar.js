@@ -17,9 +17,10 @@ router.route('/add').post((req, res) => {
     const link = req.body.link;
     const army = req.body.army;
     const soldiers = req.body.soldiers;
+    const missionConclude = false;
     const active = true;
 
-    const newCalendar = new Calendar({ name, isOpen, date, place, mapLink, link, text, army, soldiers, active });
+    const newCalendar = new Calendar({ name, isOpen, date, place, mapLink, link, text, army, soldiers, active, missionConclude });
 
     newCalendar.save()
         .then(() => res.json('Calendar added!'))
@@ -60,6 +61,7 @@ router.route('/update-calendar/:id').post((req, res) => {
             calendar.link = req.body.link;
             calendar.text = req.body.text;
             calendar.army = req.body.army;
+            calendar.missionConclude = req.body.missionConclude;
 
             calendar.save()
                 .then(() => res.json('Calendar updated!'))
@@ -72,6 +74,7 @@ router.route('/conclude-calendar/:id').post((req, res) => {
     Calendar.findById(req.params.id)
         .then(calendar => {
             calendar.active = req.body.active;
+            calendar.missionConclude = req.body.missionConclude;
 
             calendar.save()
                 .then(() => res.json('Calendar concluded!'))
