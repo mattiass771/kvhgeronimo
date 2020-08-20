@@ -80,6 +80,17 @@ class Platoon extends Component {
     }
     //
 
+    getPoints = (action) => {
+        let result = 0
+        action.map((val) => {
+            const tempPoints = this.state.missionData.map(el => val === el.name && el.points)
+            const number = tempPoints.reduce((a,b)=>a+b)
+            result += parseInt(number)
+        })
+
+        return result
+    }
+
     getSoldiers = () => {
         let squads = ["HQ", "WAC"]
         let onShow = []
@@ -108,6 +119,8 @@ class Platoon extends Component {
                                     {tempData.completeName}
                                     <br />
                                     {tempData.func}
+                                    <br />
+                                    Exp: {this.getPoints(tempData.action)}
                                 </Col>
                             </Row>
                             <br />
@@ -115,27 +128,53 @@ class Platoon extends Component {
                     )
                 }
             }
-            for (let obj of onShow) {
+            for (let j = 0; j<onShow.length; j++) {
+                let obj = onShow[j]
                 let i = onShow.indexOf(obj)
                 if (obj.ref && (obj.ref === "Squad Leader")) {
                     let temp = onShow.splice(i,1)
                     onShow.splice(1,0,temp)
+                    j--
                 }
                 if (obj.ref && (obj.ref === "2nd in Charge")) {
                     let temp = onShow.splice(i,1)
                     onShow.splice(2,0,temp)
+                    j--
                 }
                 if (obj.ref && (obj.ref === "Assistant SQ Leader")) {
                     let temp = onShow.splice(i,1)
                     onShow.splice(3,0,temp)
+                    j--
                 }
                 if (obj.ref && (obj.ref === "2nd Assistant SQ Leader")) {
                     let temp = onShow.splice(i,1)
                     onShow.splice(4,0,temp)
+                    j--
                 }
                 if (obj.ref && (obj.ref === "Rifle Man")) {
                     let temp = onShow.splice(i,1)
                     onShow.push(temp)
+                    j--
+                }
+            }
+            for (let j = 0; j<onShow.length; j++) {
+                let obj = onShow[j]
+                let i = onShow.indexOf(obj)
+                if (obj.ref && (obj.ref === "Missing in Action")) {
+                    let temp = onShow.splice(i,1)
+                    console.log(temp)
+                    onShow.push(temp)
+                    j--
+                }
+            }
+            for (let j = 0; j<onShow.length; j++) {
+                let obj = onShow[j]
+                let i = onShow.indexOf(obj)
+                if (obj.ref && (obj.ref === "Killed in Action")) {
+                    let temp = onShow.splice(i,1)
+                    console.log(temp)
+                    onShow.push(temp)
+                    j--
                 }
             }
             final.push(

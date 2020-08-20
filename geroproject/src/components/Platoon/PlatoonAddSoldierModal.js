@@ -243,6 +243,7 @@ class PlatoonAddSoldierModal extends Component {
                                 >
                                     <option value=""></option>
                                     <option value="Administration">Administration</option>
+                                    <option value="Field Kitchen">Field Kitchen</option>
                                     <option value="Rifle Man">Rifle Man</option>
                                     <option value="2nd Assistant SQ Leader">2nd Assistant SQ Leader</option>
                                     <option value="Assistant SQ Leader">Assistant SQ Leader</option>
@@ -252,6 +253,8 @@ class PlatoonAddSoldierModal extends Component {
                                     <option value="1st Lieutenant">1st Lieutenant</option>
                                     <option value="Platoon Leader Assistant">Platoon Leader Assistant</option>
                                     <option value="Platoon Leader">Platoon Leader</option>
+                                    <option value="Killed in Action">Killed in Action</option>
+                                    <option value="Missing in Action">Missing in Action</option>
                                 </select>
                             </p>
                             <p style={{borderRadius: "10px", textAlign:"center", width:"50%", display:"inline-block"}}>

@@ -3,6 +3,8 @@ import axios from 'axios'
 
 import { Container, Row, Col, Image } from 'react-bootstrap';
 
+import { GiPlainCircle } from 'react-icons/gi';
+
 class ShowProfileInModal extends Component {
     constructor(props) {
         super(props)
@@ -42,10 +44,10 @@ class ShowProfileInModal extends Component {
         this.props.soldierData.action.map((val, i) => {
             i<1 ?
             output.push(
-                <span key={i}>{val}</span>
+                <span key={i}><em>{val}</em>&nbsp;</span>
             ) :
             output.push(
-                <span key={i}>,&nbsp;{val}</span>
+                <span key={i} style={{display: "inline"}}><GiPlainCircle style={{marginBottom:"6px", height: "10px"}} />&nbsp;<em>{val}</em>&nbsp;</span>
             )
         })
         return output
@@ -69,7 +71,7 @@ class ShowProfileInModal extends Component {
                     <Col lg={{span:4, offset:2}} style={{textAlign:"center"}}>
                         <Image style={{ marginTop: "40px" }} src={this.props.soldierData.imageURL ? this.props.soldierData.imageURL : 
                             "https://i.ibb.co/RYtTKY1/emptypicture.jpg"} thumbnail fluid />
-                         {(this.props.soldierData.action && this.props.soldierData.action.length > 0) && <h5>Points: {this.getPoints()}</h5>}
+                         {(this.props.soldierData.action && this.props.soldierData.action.length > 0) && <h5>Exp: {this.getPoints()}</h5>}
                     </Col>
                     <Col lg={4} style={{textAlign:"center"}}>
                         {this.getSoldierInfo()}
