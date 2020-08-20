@@ -34,6 +34,7 @@ class CalendarCompareModal extends Component {
         axios.get(`https://kvhgeronimo.herokuapp.com/calendar/${this.props.itemID}`)
             .then(response => {
                 this.setState({ conclude: response.data.missionConclude, currMission: response.data.name })
+                console.log(response.data.missionConclude, this.state.conclude, this.state.currMission, response.data.currMission)
             })
             .catch(error => {
                 console.log(error.data)
@@ -155,7 +156,9 @@ class CalendarCompareModal extends Component {
                         </select>}
                         &nbsp;
                         {!this.state.conclude && 
-                        <Button variant="outline-dark" onClick={this.submitMission}>Yes</Button>}<br />
+                        <Button variant="outline-dark" onClick={this.submitMission}>Yes</Button>}
+                        {this.state.conclude && <p>This mission has already been concluded, clicking on "No, but still conclude" will save the changes you made to the existing mission in the database. AIRBORNE, ALL THE WAY!</p>}
+                        <br />
                         <Button style={{marginTop:"5px"}} variant="outline-dark" onClick={this.concludeOnly}>No, but still conclude.</Button><br />
                         <Button style={{marginTop:"5px"}} variant="outline-dark" onClick={this.handleClose}>Don't Conclude</Button>
                     </form>
